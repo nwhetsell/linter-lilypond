@@ -1,0 +1,28 @@
+{
+  "name": "linter-lilypond",
+  "main": "./lib/linter-lilypond",
+  "version": "0.0.0",
+  "description": "Lint LilyPond files",
+  "keywords": [
+    "lilypond",
+    "music"
+  ],
+  "repository": "https://github.com/nwhetsell/linter-lilypond",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "packages-deps": [
+    "linter"
+  ],
+  "dependencies": {
+    "atom-linter": "latest"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "2.0.0": "provideLinter"
+      }
+    }
+  }
+}
