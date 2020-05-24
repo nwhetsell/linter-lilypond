@@ -2,21 +2,10 @@
 
 language: generic
 
-os:
-  - linux
-  - osx
+os: linux
 
 install:
-  - |
-    if [ $TRAVIS_OS_NAME = 'linux' ]; then
-      sudo apt-get --assume-yes install lilypond
-    elif [ $TRAVIS_OS_NAME = 'osx' ]; then
-      brew cask install lilypond
-    fi
-  - |
-    lilypond - <<EOS
-      { c' }
-    EOS
+  - sudo apt-get --assume-yes install lilypond
 
 before_script: |
   mkdir grammars
