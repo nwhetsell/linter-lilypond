@@ -13,7 +13,10 @@ install:
     elif [ $TRAVIS_OS_NAME = 'osx' ]; then
       brew cask install lilypond
     fi
-  - lilypond --version
+  - |
+    lilypond - <<EOS
+      { c' }
+    EOS
 
 before_script: |
   mkdir grammars

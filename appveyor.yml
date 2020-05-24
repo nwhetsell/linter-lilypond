@@ -2,7 +2,7 @@
 
 install:
   - choco install lilypond
-  - RefreshEnv
+  - set PATH=%PATH%;%ProgramFiles(x86)%\LilyPond\usr\bin
 
 before_build:
   - ps: |
