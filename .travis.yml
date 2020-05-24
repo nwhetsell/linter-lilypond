@@ -6,12 +6,14 @@ os:
   - linux
   - osx
 
-install: |
-  if [ $TRAVIS_OS_NAME = 'linux' ]; then
-    sudo apt-get --assume-yes install lilypond
-  elif [ $TRAVIS_OS_NAME = 'osx' ]; then
-    brew cask install lilypond
-  fi
+install:
+  - |
+    if [ $TRAVIS_OS_NAME = 'linux' ]; then
+      sudo apt-get --assume-yes install lilypond
+    elif [ $TRAVIS_OS_NAME = 'osx' ]; then
+      brew cask install lilypond
+    fi
+  - lilypond --version
 
 before_script: |
   mkdir grammars

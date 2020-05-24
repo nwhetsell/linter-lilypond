@@ -2,6 +2,7 @@
 
 install:
   - choco install lilypond
+  - RefreshEnv
 
 before_build:
   - ps: |
