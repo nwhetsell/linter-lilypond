@@ -1,10 +1,15 @@
 # https://github.com/atom/ci
 
-build_script:
+install:
+  - choco install lilypond
+
+before_build:
   - ps: |
       New-Item grammars -ItemType Directory
       Set-Content grammars\lilypond.cson '{name: "LilyPond", scopeName: "source.lilypond", fileTypes: ["ly"]}'
-      Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/atom/ci/master/build-package.ps1'))
+
+build_script:
+  - ps: Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/atom/ci/master/build-package.ps1'))
 
 skip_tags: true
 test: off
