@@ -1,0 +1,12 @@
+# https://github.com/atom/ci
+
+language: generic
+
+os:
+  - linux
+  - osx
+
+script: |
+  mkdir grammars
+  echo '{name: "LilyPond", scopeName: "source.lilypond", fileTypes: ["ly"]}' > grammars/lilypond.cson
+  curl --show-error --silent https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh
