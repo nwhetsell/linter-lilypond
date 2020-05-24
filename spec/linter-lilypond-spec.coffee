@@ -36,3 +36,34 @@ describe "linter-lilypond", ->
           fs.unlinkSync(filePath)
         )
       )
+
+    it "lints an error in an included file", ->
+      includeFilePath = path.join(__dirname, "include.ly")
+      includeFile = fs.openSync(includeFilePath, "w")
+      fs.writeSync(includeFile, "{ error }")
+      fs.closeSync(includeFile)
+      testFilePath = path.join(__dirname, "test.ly")
+      testFile = fs.openSync(testFilePath, "w")
+      fs.writeSync(testFile, '\\include "include.ly"')
+      fs.closeSync(testFile)
+      waitsForPromise -> atom.workspace.open(testFilePath).then((editor) ->
+        waitsForPromise -> lint(editor).then((messages) ->
+          expect(messages.length).toBe 1
+          expect(messages[0].severity).toBe "error"
+          # The excerpt should be "not a note name: error", but this varies by
+          # LilyPond version.
+          expect(messages[0].location.file).toBe includeFilePath
+          expect(messages[0].location.position).toEqual [[0, 2], [0, 2]]
+          fs.unlinkSync(includeFilePath)
+          fs.unlinkSync(testFilePath)
+        )
+      )
+
+  describe "LilyPond grammar", ->
+    grammar = undefined
+
+    beforeEach ->
+      grammar = atom.grammars.grammarForScopeName "source.lilypond"
+
+    it "is defined", ->
+      expect(grammar.scopeName).toBe "source.lilypond"
