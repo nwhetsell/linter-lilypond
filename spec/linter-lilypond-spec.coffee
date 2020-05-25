@@ -20,6 +20,19 @@ describe "linter-lilypond", ->
         )
       )
 
+    it "deletes output MIDI file", ->
+      filePath = path.join(__dirname, "test.ly")
+      file = fs.openSync(filePath, "w")
+      fs.writeSync(file, "\\score { { c' } \\midi { } }")
+      fs.closeSync(file)
+      waitsForPromise -> atom.workspace.open(filePath).then((editor) ->
+        waitsForPromise -> lint(editor).then((messages) ->
+          expect(messages.length).toBe 0
+          expect(-> fs.unlinkSync(path.join(__dirname, "-.midi"))).toThrow("ENOENT: no such file or directory, unlink '#{path.join(__dirname, "-.midi")}'")
+          fs.unlinkSync(filePath)
+        )
+      )
+
     it "lints an invalid note name", ->
       filePath = path.join(__dirname, "test.ly")
       file = fs.openSync(filePath, "w")

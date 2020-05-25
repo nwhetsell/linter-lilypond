@@ -1,4 +1,5 @@
 atomLinter = require("atom-linter")
+fs = require("fs")
 path = require("path")
 
 messageRegex = new RegExp([
@@ -47,6 +48,13 @@ LinterLilyPond =
             uniqueKey: "linter-lilypond:#{filePath}"
           }
           atomLinter.exec(atom.config.get("linter-lilypond.executablePath"), parameters, options).then((stderr) ->
+            # A LilyPond \midi block will produce a MIDI file named -.midi;
+            # delete this.
+            fs.unlink(path.join(fileDirectory, "-.midi"), (error) ->
+              if error and error.code isnt "ENOENT"
+                throw error
+            )
+
             if stderr?
               while (result = messageRegex.exec(stderr))
                 line = Number.parseInt(result[2], 10) - 1
