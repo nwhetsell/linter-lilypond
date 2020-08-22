@@ -31,7 +31,8 @@ describe("linter-lilypond", () => {
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
           expect(messages.length).toBe(0);
-          expect(() => fs.unlinkSync(path.join(__dirname, "-.midi"))).toThrow(`ENOENT: no such file or directory, unlink '${path.join(__dirname, "-.midi")}'`);
+          const outputFilePath = path.join(__dirname, "-.midi");
+          expect(() => fs.unlinkSync(outputFilePath)).toThrow(`ENOENT: no such file or directory, unlink '${outputFilePath}'`);
           fs.unlinkSync(filePath);
         }));
       }));
@@ -74,6 +75,31 @@ describe("linter-lilypond", () => {
           expect(messages[0].location.position).toEqual([[0, 2], [0, 2]]);
           fs.unlinkSync(includeFilePath);
           fs.unlinkSync(testFilePath);
+        }));
+      }));
+    });
+
+    it("doesn’t create files when lilypond-book-preamble.ly is used", () => {
+      const filePath = path.join(__dirname, "test.ly");
+      const file = fs.openSync(filePath, "w");
+      fs.writeSync(file, '\\include "lilypond-book-preamble.ly"\n{ c }');
+      fs.closeSync(file);
+      waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
+        waitsForPromise(() => lint(editor).then(messages => {
+          expect(messages).toBeNull();
+          const outputFileNames = [
+            "--1.eps",
+            "--1.pdf",
+            "--systems.count",
+            "--systems.tex",
+            "--systems.texi",
+            "-.pdf"
+          ];
+          for (const outputFileName of outputFileNames) {
+            const outputFilePath = path.join(__dirname, outputFileName);
+            expect(() => fs.unlinkSync(outputFilePath)).toThrow(`ENOENT: no such file or directory, unlink '${outputFilePath}'`);
+          }
+          fs.unlinkSync(filePath);
         }));
       }));
     });
