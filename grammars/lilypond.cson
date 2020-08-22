@@ -1,0 +1,893 @@
+"name": "LilyPond"
+scopeName: "source.lilypond"
+fileTypes: ["ily", "ly"]
+
+patterns: [
+  {include: "#expression"}
+  {include: "#note_name"}
+]
+
+repository:
+  comments:
+    patterns: [
+      {
+        name:  "comment.block.lilypond"
+        begin: "%{"
+        end:   "%}"
+        beginCaptures: 0: name: "punctuation.definition.comment.begin.lilypond"
+        endCaptures:   0: name: "punctuation.definition.comment.end.lilypond"
+      },{
+        name:  "comment.line.lilypond"
+        begin: "%"
+        end:   "$"
+        beginCaptures: 0: name: "punctuation.definition.comment.lilypond"
+      }
+    ]
+
+  integer:
+    patterns: [
+      {
+        name:  "constant.numeric.integer.lilypond"
+        match: "\\d+"
+      }
+    ]
+
+  expression:
+    patterns: [
+      {include: "#comments"}
+      {include: "#integer"}
+      {
+        name:  "string.lilypond"
+        begin: '"'
+        end:   '"'
+        beginCaptures: 0: name: "punctuation.definition.string.begin.lilypond"
+        endCaptures:   0: name: "punctuation.definition.string.end.lilypond"
+        patterns: [
+          { # https://github.com/lilypond/lilypond/blob/stable/2.20/lily/lexer.ll#L181
+            name:  "constant.character.escape.lilypond"
+            match: "\\\\[nt\"'\\\\]"
+          }
+        ]
+      }
+
+      {
+        # A dot (.) is used to increase note lengths, toggle notes in chord
+        # mode, and access properties, so don’t give it a specialized name.
+        name:  "keyword.operator.dot.lilypond"
+        match: "\\."
+      },{
+        # An equals sign (=) is used for assignment, metronome marks, and
+        # octave checking, so don’t give it a specialized name.
+        name:  "keyword.operator.equals-sign.lilypond"
+        match: "="
+      }
+
+      {
+        # https://lilypond.org/doc/Documentation/notation/single-voice#simultaneous-expressions
+        name:  "meta.simultaneous-expressions.lilypond"
+        begin: "<<"
+        end:   ">>"
+        beginCaptures: 0: name: "punctuation.simultaneous-expressions.begin.lilypond"
+        endCaptures:   0: name: "punctuation.simultaneous-expressions.end.lilypond"
+        patterns: [
+          {include: "#music_expression_contents"}
+          {include: "$self"}
+        ]
+      },{
+        # https://lilypond.org/doc/Documentation/notation/multiple-voices#-The-double-backslash-construct
+        name:  "meta.separator.simultaneous-expressions.lilypond"
+        match: "\\\\\\\\"
+      }
+
+      {
+        name:  "meta.$1.lilypond"
+        begin: "\\\\(fixed|relative)(?!-?[[:alpha:]])"
+        end:   "(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "support.function.lilypond"
+        patterns: [
+          {include: "#octave_transpose_operators"}
+          {include: "$self"}
+        ]
+      },{
+        name:  "meta.note-mode.lilypond"
+        begin: "\\\\notemode(?!-?[[:alpha:]])"
+        end:   "(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "keyword.other.lilypond"
+        patterns: [
+          {include: "#music_expression"}
+          {include: "$self"}
+        ]
+      },{
+        name:  "meta.markup-block.lilypond"
+        begin: "\\\\markup(?:list)?(?!-?[[:alpha:]])"
+        end:   "(?<!\\\\)([-\\w]+)|(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "keyword.other.lilypond"
+        endCaptures:   1: name: "meta.markup-expression.lilypond"
+        patterns: [
+          {include: "#markup_command"}
+          {include: "#markup_expression"}
+          {include: "$self"}
+        ]
+      },{
+        name:  "meta.lyric-mode.lilypond"
+        begin: "\\\\(?:addlyrics|lyric(?:mode|s(?:to)?))(?!-?[[:alpha:]])"
+        end:   "(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "keyword.other.lilypond"
+        patterns: [
+          {include: "#lyric_expression"}
+          {include: "$self"}
+        ]
+      },{
+        name:  "meta.drum-mode.lilypond"
+        begin: "\\\\drum(?:mode|s)(?!-?[[:alpha:]])"
+        end:   "(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "keyword.other.lilypond"
+        patterns: [
+          {include: "#drum_expression"}
+          {include: "$self"}
+        ]
+      },{
+        name:  "meta.chord-mode.lilypond"
+        begin: "\\\\chordmode(?!-?[[:alpha:]])"
+        end:   "(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "keyword.other.lilypond"
+        patterns: [
+          {include: "#chord_expression"}
+          {include: "$self"}
+        ]
+      },{
+        name:  "meta.figure-mode.lilypond"
+        begin: "\\\\figure(?:mode|s)(?!-?[[:alpha:]])"
+        end:   "(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "keyword.other.lilypond"
+        patterns: [
+          {include: "#figure_expression"}
+          {include: "$self"}
+        ]
+      },{
+        name:  "meta.paper-block.lilypond"
+        begin: "\\\\paper(?!-?[[:alpha:]])"
+        end:   "(?<=[^%]})|(?<=^})"
+        beginCaptures: 0: name: "keyword.other.lilypond"
+        patterns: [
+          {include: "#paper_expression"}
+          {include: "$self"}
+        ]
+      }
+
+      {
+        name:  "keyword.other.lilypond"
+        # To update this regex, run:
+        ###
+LilyPond_keywords=$(lilypond --loglevel=ERROR - <<EOS
+#(begin
+  (display "[")
+  (for-each
+    (lambda (keyword)
+      (display "'")(display (car keyword))(display "',")
+    )
+    (ly:lexer-keywords (ly:parser-lexer))
+  )
+  (display "'include','maininput','version']")
+)
+EOS
+)
+curl --remote-name --show-error --silent https://raw.githubusercontent.com/pygments/pygments/master/pygments/regexopt.py
+python -c '
+from regexopt import regex_opt
+print(regex_opt('"$LilyPond_keywords"', r"\\\\", r"(?!-?[[:alpha:]])"))
+'
+        ###
+        match: "\\\\(a(?:ccepts|ddlyrics|l(?:ias|ternative))|book(?:(?:part)?)|c(?:h(?:ange|ord(?:mode|s))|on(?:sists|text))|d(?:e(?:fault(?:(?:child)?)|nies|scription)|rum(?:mode|s))|etc|figure(?:mode|s)|header|include|l(?:ayout|yric(?:mode|s(?:(?:to)?)))|m(?:a(?:ininput|rkup(?:(?:list)?))|idi)|n(?:ame|ew|otemode)|override|paper|re(?:move|(?:pea|s|ver)t)|s(?:core|e(?:quential|t)|imultaneous)|t(?:empo|ype)|unset|version|with)(?!-?[[:alpha:]])"
+      },{
+        name:  "support.function.lilypond"
+        # To update this regex, run:
+        ###
+git clone https://github.com/lilypond/lilypond.git
+cd lilypond
+git checkout stable/2.20
+LilyPond_commands=$(python -c '
+import re
+commands = set()
+for path in ["ly/declarations-init.ly",
+             "ly/music-functions-init.ly",
+             "ly/toc-init.ly",
+             "ly/drumpitch-init.ly",
+             "ly/chord-modifiers-init.ly",
+             "ly/script-init.ly",
+             "ly/chord-repetition-init.ly",
+             "ly/scale-definitions-init.ly",
+             "ly/dynamic-scripts-init.ly",
+             "ly/spanners-init.ly",
+             "ly/predefined-fretboards-init.ly",
+             "ly/string-tunings-init.ly",
+             "ly/property-init.ly",
+             "ly/grace-init.ly",
+             "ly/performer-init.ly",
+             "ly/paper-defaults-init.ly",
+             "ly/context-mods-init.ly"]:
+    with open(path) as file:
+        for match in re.finditer("^(?:([A-Za-z]+)|\"([A-Za-z]+)\")\\s*=", file.read(), re.MULTILINE):
+            if (match.group(1)):
+                commands.add(match.group(1))
+            else:
+                commands.add(match.group(2))
+print("[" + ",".join(["\"" + command + "\"" for command in commands]) + "]")
+')
+cd ..
+curl --remote-name --show-error --silent https://raw.githubusercontent.com/pygments/pygments/master/pygments/regexopt.py
+python -c '
+from regexopt import regex_opt
+print(regex_opt('"$LilyPond_commands"', r"\\\\", r"(?!-?[[:alpha:]])").replace("\\-", "-"))
+'
+rm -fR lilypond
+        ###
+        match: "\\\\(Remove(?:(?:(?:All)?)EmptyStaves)|a(?:bsolute|cc(?:ent|i(?:accatura|dentalStyle))|dd(?:ChordShape|InstrumentDefinition|Quote)|eolian|fterGrace(?:(?:Fraction)?)|ikenHeads(?:(?:Minor)?)|l(?:low(?:PageTurn|VoltaHook)|terBroken)|pp(?:endToTag|ly(?:Context|Music|Output)|oggiatura)|r(?:abicStringNumbers|peggio(?:(?:Arrow(?:Down|Up)|Bracket|Normal|Parenthesis(?:(?:Dashed)?))?))|ssertBeam(?:Quant|Slope)|uto(?:B(?:eamO(?:ff|n)|reaksO(?:ff|n))|LineBreaksO(?:ff|n)|PageBreaksO(?:ff|n)|change))|b(?:a(?:lloon(?:GrobText|LengthO(?:ff|n)|Text)|r(?:(?:NumberCheck)?)|ssFigure(?:ExtendersO(?:ff|n)|StaffAlignment(?:Down|Neutral|Up)))|e(?:amExceptions|ndAfter)|igger|lackTriangleMarkup|ookOutput(?:Name|Suffix)|re(?:a(?:k(?:(?:DynamicSpan)?)|the)|ve))|c(?:adenzaO(?:ff|n)|enter|hord(?:(?:Repeat|modifier)s)|lef|o(?:da|mp(?:oundMeter|ress(?:(?:FullBar|MM)Rests)))|r(?:(?:esc(?:(?:Hairpin|TextCresc)?)|ossStaff)?)|ue(?:Clef(?:(?:Unset)?)|During(?:(?:WithClef)?)))|d(?:ash(?:Bang|D(?:ash|ot)|Hat|Larger|Plus|Underscore)|e(?:adNote(?:(?:sO(?:ff|n))?)|cr(?:(?:esc)?)|f(?:ault(?:NoteHeads|StringTunings|TimeSignature)|ineBarLine)|precated(?:cresc|dim|end(?:cresc|dim)))|i(?:m(?:(?:Hairpin|TextD(?:ecr(?:(?:esc)?)|im))?)|splay(?:LilyMusic|Music|Scheme))|o(?:rian|ts(?:Down|Neutral|Up)|wn(?:(?:bow|mordent|prall)?))|rumPitchNames|ynamic(?:Down|Neutral|Up))|e(?:asyHeadsO(?:ff|n)|nd(?:Spanners|cr(?:(?:esc)?)|d(?:ecr(?:(?:esc)?)|im))|pisem(?:Finis|Initium)|spressivo|(?:ventChord|xpandFullBarRest)s)|f(?:e(?:atherDurations|rmata(?:(?:Markup)?))|ff(?:(?:f(?:(?:f)?))?)|i(?:nger|xed)|lageolet|ootnote|renchChords|u(?:llJazzExceptions|nkHeads(?:(?:Minor)?))|[fpz])|g(?:ermanChords|lissando|r(?:ace|obdescriptions))|h(?:a(?:lfopen|rmonic(?:(?:By(?:Fret|Ratio)|Note|sO(?:ff|n))?))|ide(?:(?:Notes|S(?:plitTiedTabNotes|taffSwitch))?)|uge)|i(?:gnatzekException(?:Music|s)|mprovisationO(?:ff|n)|n(?:StaffSegno|cipit|strumentSwitch|version)|onian|talianChords)|k(?:e(?:epWithTag|y)|i(?:evanO(?:ff|n)|llCues))|l(?:a(?:bel|issezVibrer|(?:nguag(?:(?:e(?:Restor|SaveAndChang))?)|rg)e)|eft|heel|ineprall|o(?:crian|ng(?:(?:(?:fermat)?)a))|toe|ydian)|m(?:a(?:gnify(?:Music|Staff)|jor|ke(?:Clusters|DefaultStringTuning)|r(?:cato|k(?:(?:LengthO(?:ff|n)|upMap)?))|xima)|e(?:lisma(?:(?:End)?)|rgeDifferently(?:DottedO(?:ff|n)|HeadedO(?:ff|n)))|i(?:diDrumPitches|nor|xolydian)|o(?:dal(?:Inversion|Transpose)|rdent)|usicMap|[fp])|n(?:ewSpacingSection|o(?:B(?:eam|reak)|Page(?:Break|Turn)|rmalsize)|umericTimeSignature)|o(?:ctaveCheck|ffset|mit|n(?:(?:(?:eVoi)?)ce)|pen|ttava|verride(?:Property|TimeSignatureSettings))|p(?:a(?:ge(?:Break|Turn)|lmMute(?:(?:O(?:ff|n))?)|r(?:allelMusic|enthesize|t(?:CombineListener|combine(?:(?:A(?:part|utomatic)|Chords|Down|Force|SoloI(?:(?:I)?)|U(?:nisono|p))?)|ial(?:(?:Jazz(?:Exceptions|Music))?))))|hr(?:asingSlur(?:D(?:ash(?:Pattern|ed)|o(?:tted|wn))|Half(?:(?:Dashe|Soli)d)|Neutral|Solid|Up)|ygian)|itchedTrill|o(?:intAndClick(?:O(?:ff|n)|Types)|rtato|werChord(?:Exceptions|Symbol|s))|p(?:(?:p(?:(?:p(?:(?:p)?))?))?)|r(?:all(?:(?:down|mordent|prall|up)?)|edefinedFretboardsO(?:ff|n)|operty(?:Override|Revert|Set|Tweak|Unset))|ushToTag)|quoteDuring|r(?:e(?:duceChords|lative|moveWithTag|peatTie|setRelativeOctave|trograde|ver(?:seturn|tTimeSignatureSettings))|fz|heel|ight(?:(?:HandFinger)?)|omanStringNumbers|toe)|s(?:acredHarpHeads(?:(?:Minor)?)|caleDurations|e(?:gno|miGermanChords|t(?:DefaultDurationToQuarter|tingsFrom))|f(?:[fpz])|h(?:ape|ift(?:Durations|O(?:ff|n(?:(?:n(?:(?:n)?))?)))|o(?:rtfermata|wS(?:plitTiedTabNotes|taffSwitch)))|i(?:(?:gnumcongruentia|ngl)e)|kip|l(?:ashedGrace|ur(?:D(?:ash(?:Pattern|ed)|o(?:tted|wn))|Half(?:(?:Dashe|Soli)d)|Neutral|Solid|Up))|mall(?:(?:er)?)|nappizzicato|o(?:stenutoO(?:ff|n)|uthernHarmonyHeads(?:(?:Minor)?))|p(?:acingTweaks|p)|t(?:a(?:ccat(?:(?:(?:issim)?)o)|rt(?:(?:A(?:(?:cciacc|ppoggi)aturaMusic)|Gr(?:ace(?:Music|Slur)|oup)|MeasureCount|S(?:lashedGraceMusic|taff)|T(?:(?:ext|rill)Span))?))|em(?:Down|Neutral|Up)|o(?:p(?:(?:A(?:(?:cciacc|ppoggi)aturaMusic)|Gr(?:ace(?:Music|Slur)|oup)|MeasureCount|S(?:lashedGraceMusic|taff)|T(?:(?:ext|rill)Span)|ped)?)|rePredefinedDiagram)|ringTuning|yledNoteHeads)|ustainO(?:ff|n)|[fp])|t(?:a(?:b(?:ChordRepe(?:ats|tition)|FullNotation)|g(?:(?:Group)?))|e(?:eny|mporary|nuto|xt(?:LengthO(?:ff|n)|Spanner(?:Down|Neutral|Up)))|humb|i(?:e(?:D(?:ash(?:Pattern|ed)|o(?:tted|wn))|Half(?:(?:Dashe|Soli)d)|Neutral|Solid|Up)|me(?:(?:s)?)|ny)|ocItem(?:(?:WithDotsMarkup)?)|r(?:anspos(?:e(?:(?:dCueDuring)?)|ition)|eCorde|ill)|u(?:plet(?:(?:Down|Neutral|Span|Up)?)|rn)|weak)|u(?:n(?:HideNotes|aCorda|do|foldRepeats)|p(?:(?:bow|mordent|prall)?))|v(?:arcoda|erylongfermata|oi(?:ce(?:Four(?:(?:Style)?)|NeutralStyle|One(?:(?:Style)?)|T(?:hree(?:(?:Style)?)|wo(?:(?:Style)?))|s)|d))|w(?:alkerHeads(?:(?:Minor)?)|hiteTriangleMarkup|ithMusicProperty)|xNote(?:(?:sO(?:ff|n))?)|[fp])(?!-?[[:alpha:]])"
+        # This is similar to the entity.name.class.keyword.lilypond regex
+        # pattern of AtLilyPond (https://atom.io/packages/atlilypond), which
+        # appears to be based on the output of a Python script included with
+        # LilyPond:
+        #
+        # https://github.com/lilypond/lilypond/blob/master/scripts/build/lilypond-words.py
+        #
+        # For a list of “keywords” that are matched by AtLilyPond but not the
+        # regex above, run:
+        #
+        ###
+curl --remote-name --show-error --silent https://raw.githubusercontent.com/yrammos/AtLilyPond/master/grammars/lilypond-internals.cson
+npm install cson
+additional_matches=$(node --eval='
+const CSON = require("cson");
+const regexPattern = CSON.load("lilypond-internals.cson").patterns[3].match;
+const substring = "\\\\(";
+const startIndex = regexPattern.indexOf(substring) + substring.length;
+const endIndex = regexPattern.indexOf(")", startIndex);
+const commands = new Set(regexPattern.substring(startIndex, endIndex).split("|"));
+for (const command of '"$LilyPond_commands"') {
+  commands.delete(command);
+}
+console.log(`["${Array.from(commands).sort().join("\",\"")}"]`);
+')
+echo $additional_matches
+        ###
+        #
+        # This list includes markup commands. To remove these, run:
+        #
+        ###
+additional_matches=$(python -c '
+import re
+additional_matches = '"$additional_matches"'
+additional_matches.remove("table-of-contents")
+for path in ["lilypond/scm/define-markup-commands.scm",
+             "lilypond/scm/fret-diagrams.scm",
+             "lilypond/scm/harp-pedals.scm"]:
+    with open(path) as file:
+        for match in re.finditer(r"\(define-markup(?:-list)?-command\s*\(([-A-Za-z]+)", file.read(), re.MULTILINE):
+            try:
+                additional_matches.remove(match.group(1))
+            except ValueError:
+                pass
+print("[" + ",".join(["\"" + match + "\"" for match in additional_matches]) + "]")
+')
+echo $additional_matches
+        ###
+        #
+        # A few matches are keywords from lily/lily-lexer.cc. To remove these,
+        # run:
+        #
+        ###
+additional_matches=$(python -c '
+import re
+additional_matches = '"$additional_matches"'
+additional_matches.remove("include")
+additional_matches.remove("maininput")
+additional_matches.remove("version")
+with open("lilypond/lily/lily-lexer.cc") as file:
+    for match in re.finditer("\\s*\\{\"([^\"]+)\",\\s*\\w+\\},", file.read(), re.MULTILINE):
+        if match.group(1) in additional_matches:
+            additional_matches.remove(match.group(1))
+print("[" + ",".join(["\"" + match + "\"" for match in additional_matches]) + "]")
+')
+echo $additional_matches
+        ###
+        #
+        # Many matches are from:
+        #
+        # * ly/engraver-init.ly, which is \include’d in a \layout block
+        # (https://lilypond.org/doc/Documentation/notation/the-layout-block)
+        # in ly/declarations-init.ly (so matches from ly/engraver-init.ly aren’t
+        # actually built-in commands)
+        #
+        # * ly/performer-init.ly, which is \include’d in a \midi block in
+        # ly/midi-init.ly, which is in turn \include’d in
+        # ly/declarations-init.ly
+        #
+        # To remove matches from ly/engraver-init.ly and ly/performer-init.ly,
+        # run:
+        #
+        ###
+additional_matches=$(python -c '
+import re
+additional_matches = '"$additional_matches"'
+for path in ["lilypond/ly/engraver-init.ly",
+             "lilypond/ly/performer-init.ly"]:
+    with open(path) as file:
+        for match in re.finditer(r"^\s*([A-Za-z]+)\s*=", file.read(), re.MULTILINE):
+            if match.group(1) in additional_matches:
+                additional_matches.remove(match.group(1))
+print("[" + ",".join(["\"" + match + "\"" for match in additional_matches]) + "]")
+')
+echo $additional_matches
+        ###
+        #
+        # A few other matches are from ly/gregorian.ly, which isn’t loaded by
+        # LilyPond by default. To remove these matches, run:
+        #
+        ###
+additional_matches=$(python -c '
+import re
+additional_matches = '"$additional_matches"'
+with open("lilypond/ly/gregorian.ly") as file:
+    for match in re.finditer(r"^\s*([A-Za-z]+)\s*=", file.read(), re.MULTILINE):
+        if match.group(1) in additional_matches:
+            additional_matches.remove(match.group(1))
+print("[" + ",".join(["\"" + match + "\"" for match in additional_matches]) + "]")
+')
+echo $additional_matches
+        ###
+        #
+        # Remaining matches don’t appear to be keywords or built-in commands.
+      }
+
+      {include: "#music_expression"}
+
+      {
+        name:  "meta.scheme.lilypond"
+        begin: "(?:(#)|(\\$)|([#$]@))(?=['`]?\\()"
+        end:   "(?<=\\))"
+        beginCaptures:
+          1: name: "keyword.operator.scheme.embed.lilypond"
+          2: name: "keyword.operator.scheme.evaluate.lilypond"
+          3: name: "keyword.operator.scheme.list-splice.lilypond"
+        patterns: [
+          {include: "#scheme_expression"}
+        ]
+      },{
+        name:  "meta.scheme.lilypond"
+        begin: "(#)|([#$]@)"
+        end:   "(?=\\s)|$"
+        beginCaptures:
+          1: name: "keyword.operator.scheme.embed.lilypond"
+          2: name: "keyword.operator.scheme.list-splice.lilypond"
+        patterns: [
+          {include: "source.lisp"}
+        ]
+      }
+    ]
+
+  note_name:
+    patterns: [
+      {
+        name:  "support.variable.note-name.lilypond"
+        match: """(?x)
+          \\b
+          (?:
+            (?:
+              (?:do|r[eé]|mi|fa|sol|la|si)
+              (?:
+                (?:b(?:s?b|t?qt)?|s(?:b|d|t?qt)|t?cb)
+                |
+                (?:d(?:s?d)?|kk?|ss?|t?cs|x)
+              )?
+            )
+
+            |
+
+            a
+            (?:
+              (?:e?(?:h|s(?:[ae][hs]|s(?:ess)?)?)|ff?|t?qf|-flat(?:flat)?)
+              |
+              (?:i(?:h|s(?:i[hs]|s(?:iss)?)?)|t?qs|x|-sharp(?:sharp)?)
+              |
+              -natural
+            )?
+            |
+            e
+            (?:
+              (?:e?(?:h|s(?:e[hs]|s(?:ess)?)?)|ff?|t?qf|-flat(?:flat)?)
+              |
+              (?:i(?:h|s(?:i[hs]|s(?:iss)?)?)|t?qs|x|-sharp(?:sharp)?)
+              |
+              -natural
+            )?
+            |
+            b
+            (?:
+              (?:b|e(?:h|s(?:e[hs]|s)?)|ff?|t?qf|-flat(?:flat)?)
+              |
+              (?:i(?:h|s(?:i[hs]|s)?)|ss?|t?qs|x|-sharp(?:sharp)?)
+              |
+              -natural
+            )?
+            |
+            [cdfg]
+            (?:
+              (?:e(?:h|s(?:e[hs]|s(?:ess)?)?)|ff?|t?qf|-flat(?:flat)?)
+              |
+              (?:i(?:h|s(?:i[hs]|s(?:iss)?)?)|ss?|t?qs|x|-sharp(?:sharp)?)
+              |
+              -natural
+            )?
+            |
+            h
+            (?:
+              e(?:h|s(?:e[hs]|sess))
+              |
+              i(?:h|s(?:i[hs]|s(?:iss)?)?)
+            )?
+          )(?!-?[[:alpha:]])
+        """
+      }
+    ]
+
+  chord_mode_notation:
+    patterns: [
+      {
+        # A forward slash (/) is used to scale durations, create tuplets, and
+        # invert chords, so don’t give it a specialized name.
+        name:  "keyword.operator.forward-slash.lilypond"
+        match: "/(?!\\+)"
+      }
+      # https://lilypond.org/doc/Documentation/notation/writing-rhythms#scaling-durations
+      {
+        name:  "meta.duration-scale.lilypond"
+        begin: "\\*"
+        end:   "(\\d+)(?:(/)(\\d+))?"
+        beginCaptures:
+          0: name: "keyword.operator.scale-duration.lilypond"
+        endCaptures:
+          1: name: "constant.numeric.integer.lilypond"
+          2: name: "keyword.operator.forward-slash.lilypond"
+          3: name: "constant.numeric.integer.lilypond"
+        patterns: [
+          {include: "#comments"}
+        ]
+      }
+      # https://lilypond.org/doc/Documentation/notation/writing-rhythms#ties
+      {
+        name:  "keyword.operator.tie.lilypond"
+        match: "~"
+      }
+      # https://lilypond.org/doc/Documentation/notation/writing-rests
+      {
+        name:  "support.variable.rest.lilypond"
+        match: "\\b[rRs](?!-?[[:alpha:]])"
+      }
+      # https://lilypond.org/doc/Documentation/notation/beams#manual-beams
+      {
+        name:  "keyword.operator.beam.begin.lilypond"
+        match: "\\["
+      },{
+        name:  "keyword.operator.beam.end.lilypond"
+        match: "\\]"
+      }
+      # https://lilypond.org/doc/Documentation/notation/bars#bar-and-bar-number-checks
+      {
+        name:  "keyword.operator.bar-check.lilypond"
+        match: "\\|"
+      }
+      # https://lilypond.org/doc/Documentation/notation/expressive-marks-attached-to-notes#dynamics
+      {
+        name:  "keyword.operator.dynamic-mark.begin.crescendo.lilypond"
+        match: "\\\\<"
+      },{
+        name:  "keyword.operator.dynamic-mark.begin.decrescendo.lilypond"
+        match: "\\\\>"
+      },{
+        name:  "keyword.operator.dynamic-mark.end.lilypond"
+        match: "\\\\!"
+      }
+      # https://lilypond.org/doc/Documentation/notation/expressive-marks-as-curves#slurs
+      {
+        name:  "keyword.operator.slur.begin.lilypond"
+        match: "\\("
+      },{
+        name:  "keyword.operator.slur.end.lilypond"
+        match: "\\)"
+      },{
+        name:  "keyword.operator.phrasing-slur.begin.lilypond"
+        match: "\\\\\\("
+      },{
+        name:  "keyword.operator.phrasing-slur.end.lilypond"
+        match: "\\\\\\)"
+      },{
+        name:  "meta.slur-label.lilypond"
+        begin: "\\\\="
+        end:   "(?=\\\\?[()])"
+        beginCaptures: 0: name: "entity.punctuation.slur-label.lilypond"
+        patterns: [
+          {include: "#comments"}
+          {
+            name:  "entity.name.slur-label.lilypond"
+            match: "[-\\w]+"
+          },{
+            name:  "string.lilypond"
+            begin: '"'
+            end:   '"'
+            beginCaptures: 0: name: "punctuation.definition.string.begin.lilypond"
+            endCaptures:   0: name: "punctuation.definition.string.end.lilypond"
+            contentName: "entity.name.slur-label.lilypond"
+            patterns: [
+              { # https://github.com/lilypond/lilypond/blob/stable/2.20/lily/lexer.ll#L181
+                name:  "constant.character.escape.lilypond"
+                match: "\\\\[nt\"'\\\\]"
+              }
+            ]
+          }
+        ]
+      }
+      # https://lilypond.org/doc/Documentation/notation/single-voice#chorded-notes
+      {
+        name:  "meta.chord.lilypond"
+        begin: "<(?!<)"
+        end:   "(?<![->])>"
+        beginCaptures: 0: name: "punctuation.definition.chord.begin.lilypond"
+        endCaptures:   0: name: "punctuation.definition.chord.end.lilypond"
+        patterns: [
+          {
+            name:  "invalid.illegal.lilypond"
+            match: "<"
+          }
+          {include: "#music_expression_contents"}
+        ]
+      }
+      # https://lilypond.org/doc/Documentation/notation/single-voice#chord-repetition
+      {
+        name:  "keyword.operator.chord-repetition.lilypond"
+        match: "(?<![[:alpha:]])q(?!-?[[:alpha:]])"
+      }
+      # https://lilypond.org/doc/Documentation/notation/ancient-notation_002d_002dcommon-features#ligatures
+      {
+        # LilyPond’s documentation seems to indicate that a \ligature function
+        # in gregorian.ly is preferred.
+        name:  "invalid.deprecated.ligature.begin.lilypond"
+        match: "\\\\\\["
+      },{
+        name:  "invalid.deprecated.ligature.end.lilypond"
+        match: "\\\\\\]"
+      }
+      # https://lilypond.org/doc/Documentation/notation/direction-and-placement#articulation-direction-indicators
+      {
+        name:  "keyword.operator.articulation-direction-indicator.down.lilypond"
+        match: "_"
+      }
+    ]
+
+  music_notation:
+    patterns: [
+      {include: "#chord_mode_notation"}
+      # https://lilypond.org/doc/Documentation/notation/expressive-marks-attached-to-notes#articulations-and-ornamentations
+      {
+        name:  "keyword.operator.articulation.marcato.lilypond"
+        match: "-\\^"
+      },{
+        name:  "keyword.operator.articulation.stopped.lilypond"
+        match: "-\\+"
+      },{
+        name:  "keyword.operator.articulation.tenuto.lilypond"
+        match: "--"
+      },{
+        name:  "keyword.operator.articulation.staccatissimo.lilypond"
+        match: "-!"
+      },{
+        name:  "keyword.operator.articulation.accent.lilypond"
+        match: "->"
+      },{
+        name:  "keyword.operator.articulation.staccato.lilypond"
+        match: "-\\."
+      },{
+        name:  "keyword.operator.articulation.portato.lilypond"
+        match: "-_"
+      }
+      # https://lilypond.org/doc/Documentation/notation/direction-and-placement#articulation-direction-indicators
+      {
+        name:  "keyword.operator.articulation-direction-indicator.up.lilypond"
+        match: "\\^"
+      },{
+        name:  "keyword.operator.articulation-direction-indicator.default.lilypond"
+        match: "(?<![[:alpha:]])-|-(?![[:alpha:]])"
+      }
+    ]
+
+  octave_transpose_operators:
+    patterns: [
+      {
+        name:  "keyword.operator.transpose-octave.up.lilypond"
+        match: "'"
+      },{
+        name:  "keyword.operator.transpose-octave.down.lilypond"
+        match: ","
+      }
+    ]
+
+  music_expression_contents:
+    patterns: [
+      {include: "#music_notation"}
+      {include: "#octave_transpose_operators"}
+      # https://lilypond.org/doc/Documentation/notation/writing-pitches#accidentals
+      {
+        name:  "keyword.operator.accidental.reminder.lilypond"
+        match: "!"
+      },{
+        name:  "keyword.operator.accidental.cautionary.lilypond"
+        match: "\\?"
+      },
+      {include: "$self"}
+    ]
+
+  music_expression:
+    patterns: [
+      {
+        name:  "meta.music-expression.lilypond"
+        begin: "{"
+        end:   "}"
+        patterns: [
+          {include: "#music_expression_contents"}
+        ]
+      }
+    ]
+
+  markup_command:
+    patterns: [
+      {
+        name:  "support.function.lilypond"
+        # To update this regex, run:
+        ###
+git clone https://github.com/lilypond/lilypond.git
+cd lilypond
+git checkout stable/2.20
+markup_commands=$(python -c '
+import re
+commands = set()
+for path in ["ly/toc-init.ly",
+             "scm/define-markup-commands.scm",
+             "scm/fret-diagrams.scm",
+             "scm/harp-pedals.scm"]:
+with open(path) as file:
+    for match in re.finditer(r"\(define-markup(?:-list)?-command\s*\(([-A-Za-z]+)", file.read(), re.MULTILINE):
+        commands.add(match.group(1))
+print("[" + ",".join(["\"" + command + "\"" for command in commands]) + "]")
+')
+cd ..
+curl --remote-name --show-error --silent https://raw.githubusercontent.com/pygments/pygments/master/pygments/regexopt.py
+python -c '
+from regexopt import regex_opt
+print(regex_opt('"$markup_commands"', r"\\\\", r"(?!-?[[:alpha:]])").replace("\\-", "-"))
+'
+rm -fR lilypond
+        ###
+        match: "\\\\(a(?:bs-fontsize|rrow-head|uto-footnote)|b(?:ackslashed-digit|eam|o(?:ld|x)|racket)|c(?:aps|enter-(?:(?:alig|colum)n)|har|ircle|o(?:lumn(?:(?:-lines)?)|m(?:(?:bin|mand-nam)e)|ncat))|d(?:ir-column|ouble(?:flat|sharp)|raw-(?:(?:circl|(?:(?:d(?:(?:ash|ott)ed-)|h|squiggle-)?)lin)e)|ynamic)|e(?:llipse|psfile|yeglasses)|f(?:ermata|i(?:ll(?:-(?:line|with-pattern)|ed-box)|nger|rst-visible)|lat|o(?:nt(?:Caps|size)|otnote)|r(?:action|et-diagram(?:(?:-(?:(?:ter|verbo)se))?)|omproperty))|general-align|h(?:a(?:lign|rp-pedal)|bracket|center-in|(?:spac|ug)e)|italic|justif(?:ied-lines|y(?:(?:-(?:field|line|string))?))|l(?:arge(?:(?:r)?)|eft-(?:align|brace|column)|ine|o(?:okup|wer))|m(?:a(?:gnify|p-markup-commands|rk(?:alphabet|letter))|edium|usicglyph)|n(?:atural|o(?:rmal(?:-(?:size-su(?:b|per)|text)|size)|te(?:(?:-by-number)?))|u(?:ll|mber))|o(?:n-the-fly|v(?:al|er(?:lay|ride(?:(?:-lines)?)|tie)))|p(?:a(?:d-(?:around|markup|(?:(?:to-bo)?)x)|ge-(?:link|ref)|renthesize|t(?:h|tern))|ostscript|roperty-recursive|ut-adjacent)|r(?:aise|e(?:place|st(?:(?:-by-number)?))|ight-(?:align|brace|column)|o(?:man|tate|unded-box))|s(?:ans|c(?:ale|ore(?:(?:-lines)?))|e(?:mi(?:flat|sharp)|squi(?:flat|sharp))|harp|imple|lashed-digit|mall(?:(?:Caps|er)?)|t(?:encil|rut)|u(?:b|per))|t(?:able(?:(?:-of-contents)?)|e(?:eny|xt)|i(?:e(?:(?:d-lyric)?)|ny)|r(?:ans(?:late(?:(?:-scaled)?)|parent)|iangle)|ypewriter)|u(?:nder(?:(?:lin|ti)e)|pright)|v(?:center|(?:erbatim-fil|spac)e)|w(?:hiteout|ith-(?:color|dimensions(?:(?:-from)?)|link|outline|url)|ordwrap(?:(?:-(?:field|internal|lines|string(?:(?:-internal)?)))?)))(?!-?[[:alpha:]])"
+      }
+    ]
+
+  markup_expression:
+    patterns: [
+      {
+        name:  "meta.markup-expression.lilypond"
+        begin: "{"
+        end:   "}"
+        patterns: [
+          {include: "#markup_command"}
+          {include: "#markup_expression"}
+          {include: "$self"}
+        ]
+      }
+    ]
+
+  lyric_expression:
+    patterns: [
+      {
+        name:  "meta.lyric-expression.lilypond"
+        begin: "{"
+        end:   "}"
+        patterns: [
+          # https://lilypond.org/doc/Documentation/notation/common-notation-for-vocal-music#entering-lyrics
+          {
+            name:  "keyword.operator.lyric.syllable-hyphen.lilypond"
+            match: "(?<=[\\d\\s])--(?=\\s)"
+          },{
+            name:  "keyword.operator.lyric.syllable-space.lilypond"
+            match: "(?<=\\S)_(?=\\S)"
+          },{
+            name:  "keyword.operator.lyric.tie.lilypond"
+            match: "(?<=\\S)~(?=\\S)"
+          },{
+            name:  "keyword.operator.lyric.extender-line.lilypond"
+            match: "(?<=[\\d\\s])__(?=\\s)"
+          },{
+            name:  "keyword.operator.lyric.melisma.lilypond"
+            match: "(?<=[\\d\\s])_(?=\\s)"
+          }
+          {include: "#lyric_expression"}
+          {include: "#expression"}
+        ]
+      }
+    ]
+
+  drum_expression:
+    patterns: [
+      {
+        name:  "meta.drum-expression.lilypond"
+        begin: "{"
+        end:   "}"
+        patterns: [
+          {
+            # https://lilypond.org/doc/Documentation/notation/percussion-notes
+            name:  "support.variable.percussion-note.lilypond"
+            # To update this regex, run
+            ###
+curl --remote-name --show-error --silent https://raw.githubusercontent.com/pygments/pygments/master/pygments/regexopt.py
+percussion_note_names=$(lilypond --loglevel=ERROR - <<EOS
+#(begin
+  (for-each
+    (lambda (drumPitchName) (display (car drumPitchName))(newline))
+    drumPitchNames
+  )
+)
+EOS
+)
+python -c '
+import re
+from regexopt import regex_opt
+print(regex_opt("""'"$percussion_note_names"'""".split(), r"\\b",  r"(?!-?[[:alpha:]])"))
+'
+unset percussion_note_names
+            ###
+            # and then paste the output.
+            match: "\\b(a(?:coustic(?:bassdrum|snare)|g(?:[hl]))|b(?:assdrum|d(?:(?:a)?)|o(?:h(?:[mo])|l(?:[mo])|[hl]))|c(?:ab(?:(?:asa)?)|g(?:h(?:[mo])|l(?:[mo])|[hl])|hinesecymbal|l(?:aves|osedhihat)|owbell|rashcymbal(?:(?:[ab])?)|ui(?:[mo])|ym(?:c(?:[abh])|r(?:[ab])|[crs])|[bl])|d(?:[abcde])|electricsnare|f(?:ive(?:down|up)|our(?:down|up))|gui(?:(?:ro|[ls])?)|h(?:a(?:lfopenhihat|ndclap)|h(?:ho|[cop])|i(?:agogo|bongo|conga|gh(?:(?:(?:floor)?)tom)|hat|midtom|sidestick|timbale|woodblock)|[ch])|lo(?:agogo|bongo|conga|ng(?:guiro|whistle)|sidestick|timbale|w(?:floortom|midtom|oodblock|tom))|m(?:ar(?:(?:acas)?)|ute(?:cuica|hi(?:bongo|conga)|lo(?:bongo|conga)|triangle))|o(?:ne(?:down|up)|pen(?:cuica|hi(?:bongo|conga|hat)|lo(?:bongo|conga)|triangle))|pedalhihat|r(?:b|ide(?:bell|cymbal(?:(?:[ab])?)))|s(?:hort(?:guiro|whistle)|idestick|n(?:are|[ae])|plashcymbal|s(?:[hl])|[ns])|t(?:amb(?:(?:ourine)?)|hree(?:down|up)|im(?:[hl])|om(?:f(?:[hl])|m(?:[hl])|[hl])|ri(?:(?:angle|[mo])?)|t|wo(?:down|up))|u(?:[abcde])|vib(?:raslap|s)|w(?:b(?:[hl])|h(?:[ls])))(?!-?[[:alpha:]])"
+          }
+          {include: "#music_notation"}
+          {include: "#percussion_expression"}
+          {include: "#expression"}
+        ]
+      }
+    ]
+
+  chord_expression:
+    patterns: [
+      {
+        name:  "meta.chord-expression.lilypond"
+        begin: "{"
+        end:   "}"
+        patterns: [
+          {include: "#chord_mode_notation"}
+          {include: "#octave_transpose_operators"}
+          # https://lilypond.org/doc/Documentation/notation/chord-mode
+          {
+            name:  "keyword.operator.chord.modifier-indicator.lilypond"
+            match: ":"
+          },{
+            name:  "keyword.other.chord.modifier.lilypond"
+            match: "\\b(?:aug|dim|m(?:aj)?|sus)"
+          },{
+            name:  "keyword.operator.chord.alter-note.flat.lilypond"
+            match: "-"
+          },{
+            name:  "keyword.operator.chord.alter-note.sharp.lilypond"
+            match: "\\+"
+          },{
+            name:  "keyword.operator.chord.remove-note.lilypond"
+            match: "\\^"
+          },{
+            name:  "keyword.operator.chord.add-bass-note.lilypond"
+            match: "/\\+"
+          }
+          {include: "#chord_expression"}
+          {include: "$self"}
+        ]
+      }
+    ]
+
+  figure_expression_contents:
+    patterns: [
+      {
+        name:  "invalid.illegal.lilypond"
+        match: "<"
+      }
+      {include: "#integer"}
+      {include: "#comments"}
+      {
+        name:  "keyword.operator.figure.accidental.sharp.lilypond"
+        match: "\\+"
+      },{
+        name:  "keyword.operator.figure.accidental.flat.lilypond"
+        match: "-"
+      },{
+        name:  "keyword.operator.figure.accidental.natural.lilypond"
+        match: "!"
+      },{
+        name:  "support.variable.figure.hidden-third.lilypond"
+        match: "_"
+      },{
+        name:  "keyword.operator.figure.augmented.lilypond"
+        match: "\\\\\\+"
+      },{
+        name:  "keyword.operator.figure.diminished.lilypond"
+        match: "/"
+      },{
+        name:  "keyword.operator.figure.raised-sixth.lilypond"
+        match: "\\\\\\\\"
+      },{
+        name:  "keyword.operator.figure.end-continuation-line.lilypond"
+        match: "\\\\!"
+      }
+    ]
+
+  figure_expression:
+    patterns: [
+      {
+        name:  "meta.figure-expression.lilypond"
+        begin: "{"
+        end:   "}"
+        patterns: [
+          # https://lilypond.org/doc/Documentation/notation/figured-bass#entering-figured-bass
+          {
+            name:  "meta.figure-group.lilypond"
+            begin: "<"
+            end:   ">"
+            beginCaptures: 0: name: "punctuation.definition.figure-group.begin.lilypond"
+            endCaptures:   0: name: "punctuation.definition.figure-group.end.lilypond"
+            patterns: [
+              {include: "#figure_expression_contents"}
+              {
+                name:  "meta.figure-bracket.lilypond"
+                begin: "\\["
+                end:   "\\]"
+                beginCaptures: 0: name: "punctuation.definition.figure-bracket.begin.lilypond"
+                endCaptures:   0: name: "punctuation.definition.figure-bracket.end.lilypond"
+                patterns: [
+                  {
+                    name:  "invalid.illegal.lilypond"
+                    match: "[>\\[]"
+                  }
+                  {include: "#figure_expression_contents"}
+                ]
+              }
+            ]
+          }
+          {include: "#figure_expression"}
+          {include: "$self"}
+        ]
+      }
+    ]
+
+  paper_expression:
+    patterns: [
+      {
+        name:  "meta.paper-expression.lilypond"
+        begin: "{"
+        end:   "}"
+        patterns: [
+          # https://lilypond.org/doc/Documentation/notation/the-paper-block
+          {
+            name:  "support.constant.lilypond"
+            match: "\\\\(?:[cm]m|in|pt)(?!-?[[:alpha:]])"
+          }
+          {include: "#paper_expression"}
+          {include: "$self"}
+        ]
+      }
+    ]
+
+  scheme_expression:
+    patterns: [
+      {
+        name:  "meta.scheme-expression.lilypond"
+        begin: "\\("
+        end:   "\\)"
+        patterns: [
+          {include: "#scheme_expression"}
+          {include: "source.lisp"}
+        ]
+      }
+    ]

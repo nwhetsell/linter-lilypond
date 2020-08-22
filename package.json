@@ -18,6 +18,9 @@
   "dependencies": {
     "atom-linter": "latest"
   },
+  "devDependencies": {
+    "dedent-js": "latest"
+  },
   "providedServices": {
     "linter": {
       "versions": {

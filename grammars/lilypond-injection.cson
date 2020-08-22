@@ -1,0 +1,13 @@
+"name": "LilyPond Injection"
+scopeName: "source.lilypond-injection"
+
+injectionSelector: "meta.scheme-expression.lilypond"
+patterns: [
+  {
+    begin: "#\\{"
+    end:   "#}"
+    patterns: [
+      {include: "source.lilypond"}
+    ]
+  }
+]

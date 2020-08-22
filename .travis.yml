@@ -7,8 +7,4 @@ os: linux
 install:
   - sudo apt-get --assume-yes install lilypond
 
-before_script: |
-  mkdir grammars
-  echo '{name: "LilyPond", scopeName: "source.lilypond", fileTypes: ["ly"]}' > grammars/lilypond.cson
-
 script: curl --show-error --silent https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh

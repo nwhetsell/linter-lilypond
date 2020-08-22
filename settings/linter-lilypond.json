@@ -1,0 +1,20 @@
+{
+  ".source.lilypond": {
+    "bracket-matcher": {
+      "autocompleteCharacters": [
+        "()",
+        "[]",
+        "{}",
+        "<>",
+        "\"\"",
+        "“”",
+        "‘’",
+        "«»",
+        "‹›"
+      ]
+    },
+    "editor": {
+      "commentStart": "% "
+    }
+  }
+}
