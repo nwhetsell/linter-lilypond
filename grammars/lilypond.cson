@@ -886,6 +886,13 @@ unset percussion_note_names
         begin: "\\("
         end:   "\\)"
         patterns: [
+          {
+            begin: "#\\{"
+            end:   "#}"
+            patterns: [
+              {include: "source.lilypond"}
+            ]
+          }
           {include: "#scheme_expression"}
           {include: "source.lisp"}
         ]
