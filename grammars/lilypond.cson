@@ -347,23 +347,14 @@ echo $additional_matches
 
       {
         name:  "meta.scheme.lilypond"
-        begin: "(?:(#)|(\\$)|([#$]@))(?=['`]?\\()"
-        end:   "(?<=\\))"
+        begin: "(#)|(\\$)|([#$]@)"
+        end:   "(?=\\s)|$"
         beginCaptures:
           1: name: "keyword.operator.scheme.embed.lilypond"
           2: name: "keyword.operator.scheme.evaluate.lilypond"
           3: name: "keyword.operator.scheme.list-splice.lilypond"
         patterns: [
           {include: "#scheme_expression"}
-        ]
-      },{
-        name:  "meta.scheme.lilypond"
-        begin: "(#)|([#$]@)"
-        end:   "(?=\\s)|$"
-        beginCaptures:
-          1: name: "keyword.operator.scheme.embed.lilypond"
-          2: name: "keyword.operator.scheme.list-splice.lilypond"
-        patterns: [
           {include: "source.lisp"}
         ]
       }
