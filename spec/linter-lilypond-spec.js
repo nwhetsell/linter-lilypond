@@ -5,6 +5,8 @@ const path = require("path");
 const lint = require("../lib/linter-lilypond").provideLinter().lint;
 
 describe("linter-lilypond", () => {
+  const preamble = '\\version "2.20.0"\n';
+
   beforeEach(() => {
     waitsForPromise(() => atom.packages.activatePackage("linter-lilypond"));
   });
@@ -13,11 +15,11 @@ describe("linter-lilypond", () => {
     it("lints a valid file", () => {
       const filePath = path.join(__dirname, "test.ly");
       const file = fs.openSync(filePath, "w");
-      fs.writeSync(file, "{ c' e' g' e' }");
+      fs.writeSync(file, `${preamble}{ c' e' g' e' }`);
       fs.closeSync(file);
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
-          expect(messages.length).toBe(0);
+          expect(messages).toBeNull();
           fs.unlinkSync(filePath);
         }));
       }));
@@ -26,11 +28,11 @@ describe("linter-lilypond", () => {
     it("deletes output MIDI file", () => {
       const filePath = path.join(__dirname, "test.ly");
       const file = fs.openSync(filePath, "w");
-      fs.writeSync(file, "\\score { { c' } \\midi { } }");
+      fs.writeSync(file, `${preamble}\\score { { c' } \\midi { } }`);
       fs.closeSync(file);
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
-          expect(messages.length).toBe(0);
+          expect(messages).toBeNull();
           const outputFilePath = path.join(__dirname, "-.midi");
           expect(() => fs.unlinkSync(outputFilePath)).toThrow(`ENOENT: no such file or directory, unlink '${outputFilePath}'`);
           fs.unlinkSync(filePath);
@@ -41,7 +43,7 @@ describe("linter-lilypond", () => {
     it("lints an invalid note name", () => {
       const filePath = path.join(__dirname, "test.ly");
       const file = fs.openSync(filePath, "w");
-      fs.writeSync(file, "{ error }");
+      fs.writeSync(file, `${preamble}{ error }`);
       fs.closeSync(file);
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
@@ -50,7 +52,7 @@ describe("linter-lilypond", () => {
           // The excerpt should be "not a note name: error", but this varies by
           // LilyPond version.
           expect(messages[0].location.file).toBe(filePath);
-          expect(messages[0].location.position).toEqual([[0, 2], [0, 7]]);
+          expect(messages[0].location.position).toEqual([[1, 2], [1, 7]]);
           fs.unlinkSync(filePath);
         }));
       }));
@@ -63,7 +65,7 @@ describe("linter-lilypond", () => {
       fs.closeSync(includeFile);
       const testFilePath = path.join(__dirname, "test.ly");
       const testFile = fs.openSync(testFilePath, "w");
-      fs.writeSync(testFile, '\\include "include.ly"');
+      fs.writeSync(testFile, `${preamble}\\include "include.ly"`);
       fs.closeSync(testFile);
       waitsForPromise(() => atom.workspace.open(testFilePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
@@ -82,7 +84,7 @@ describe("linter-lilypond", () => {
     it("doesn’t create files when lilypond-book-preamble.ly is used", () => {
       const filePath = path.join(__dirname, "test.ly");
       const file = fs.openSync(filePath, "w");
-      fs.writeSync(file, '\\include "lilypond-book-preamble.ly"\n{ c }');
+      fs.writeSync(file, `${preamble}\\include "lilypond-book-preamble.ly" { c }`);
       fs.closeSync(file);
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
