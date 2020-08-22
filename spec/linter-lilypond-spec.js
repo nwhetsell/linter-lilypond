@@ -456,7 +456,7 @@ describe("linter-lilypond", () => {
         expect(tokens[13]).toEqual({value: "}", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
 
         const lines = grammar.tokenizeLines(dedent`
-          ${command} { \\bold { text \\italic text
+          ${command} { \\bold { ten. \\italic dolce e semplice
           }}
         `);
         tokens = lines[0];
@@ -468,9 +468,9 @@ describe("linter-lilypond", () => {
         expect(tokens[4]).toEqual({value: "\\bold", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "support.function.lilypond"]});
         expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
         expect(tokens[6]).toEqual({value: "{", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[7]).toEqual({value: " text ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
+        expect(tokens[7]).toEqual({value: " ten. ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
         expect(tokens[8]).toEqual({value: "\\italic", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond", "support.function.lilypond"]});
-        expect(tokens[9]).toEqual({value: " text", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
+        expect(tokens[9]).toEqual({value: " dolce e semplice", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
         tokens = lines[1];
         expect(tokens.length).toBe(2);
         expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});

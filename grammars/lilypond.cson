@@ -4,6 +4,7 @@ fileTypes: ["ily", "ly"]
 
 patterns: [
   {include: "#expression"}
+  {include: "#general_operators"}
   {include: "#note_name"}
 ]
 
@@ -32,6 +33,21 @@ repository:
       }
     ]
 
+  general_operators:
+    patterns: [
+      {
+        # A dot (.) is used to increase note lengths, toggle notes in chord
+        # mode, and access properties, so don’t give it a specialized name.
+        name:  "keyword.operator.dot.lilypond"
+        match: "\\."
+      },{
+        # An equals sign (=) is used for assignment, metronome marks, and
+        # octave checking, so don’t give it a specialized name.
+        name:  "keyword.operator.equals-sign.lilypond"
+        match: "="
+      }
+    ]
+
   expression:
     patterns: [
       {include: "#comments"}
@@ -48,18 +64,6 @@ repository:
             match: "\\\\[nt\"'\\\\]"
           }
         ]
-      }
-
-      {
-        # A dot (.) is used to increase note lengths, toggle notes in chord
-        # mode, and access properties, so don’t give it a specialized name.
-        name:  "keyword.operator.dot.lilypond"
-        match: "\\."
-      },{
-        # An equals sign (=) is used for assignment, metronome marks, and
-        # octave checking, so don’t give it a specialized name.
-        name:  "keyword.operator.equals-sign.lilypond"
-        match: "="
       }
 
       {
@@ -679,7 +683,7 @@ rm -fR lilypond
         patterns: [
           {include: "#markup_command"}
           {include: "#markup_expression"}
-          {include: "$self"}
+          {include: "#expression"}
         ]
       }
     ]
@@ -748,6 +752,7 @@ unset percussion_note_names
           {include: "#music_notation"}
           {include: "#percussion_expression"}
           {include: "#expression"}
+          {include: "#general_operators"}
         ]
       }
     ]
