@@ -358,6 +358,11 @@ echo $additional_matches
           {include: "source.lisp"}
         ]
       }
+
+      {
+        name:  "variable.other.lilypond"
+        match: "\\\\[[:alpha:]]+(?:-[[:alpha:]]+)?"
+      }
     ]
 
   note_name:
