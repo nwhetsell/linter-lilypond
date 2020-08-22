@@ -724,7 +724,7 @@ rm -fR lilypond
           {
             # https://lilypond.org/doc/Documentation/notation/percussion-notes
             name:  "support.variable.percussion-note.lilypond"
-            # To update this regex, run
+            # To update this regex, run:
             ###
 curl --remote-name --show-error --silent https://raw.githubusercontent.com/pygments/pygments/master/pygments/regexopt.py
 percussion_note_names=$(lilypond --loglevel=ERROR - <<EOS
@@ -743,7 +743,6 @@ print(regex_opt("""'"$percussion_note_names"'""".split(), r"\\b",  r"(?!-?[[:alp
 '
 unset percussion_note_names
             ###
-            # and then paste the output.
             match: "\\b(a(?:coustic(?:bassdrum|snare)|g(?:[hl]))|b(?:assdrum|d(?:(?:a)?)|o(?:h(?:[mo])|l(?:[mo])|[hl]))|c(?:ab(?:(?:asa)?)|g(?:h(?:[mo])|l(?:[mo])|[hl])|hinesecymbal|l(?:aves|osedhihat)|owbell|rashcymbal(?:(?:[ab])?)|ui(?:[mo])|ym(?:c(?:[abh])|r(?:[ab])|[crs])|[bl])|d(?:[abcde])|electricsnare|f(?:ive(?:down|up)|our(?:down|up))|gui(?:(?:ro|[ls])?)|h(?:a(?:lfopenhihat|ndclap)|h(?:ho|[cop])|i(?:agogo|bongo|conga|gh(?:(?:(?:floor)?)tom)|hat|midtom|sidestick|timbale|woodblock)|[ch])|lo(?:agogo|bongo|conga|ng(?:guiro|whistle)|sidestick|timbale|w(?:floortom|midtom|oodblock|tom))|m(?:ar(?:(?:acas)?)|ute(?:cuica|hi(?:bongo|conga)|lo(?:bongo|conga)|triangle))|o(?:ne(?:down|up)|pen(?:cuica|hi(?:bongo|conga|hat)|lo(?:bongo|conga)|triangle))|pedalhihat|r(?:b|ide(?:bell|cymbal(?:(?:[ab])?)))|s(?:hort(?:guiro|whistle)|idestick|n(?:are|[ae])|plashcymbal|s(?:[hl])|[ns])|t(?:amb(?:(?:ourine)?)|hree(?:down|up)|im(?:[hl])|om(?:f(?:[hl])|m(?:[hl])|[hl])|ri(?:(?:angle|[mo])?)|t|wo(?:down|up))|u(?:[abcde])|vib(?:raslap|s)|w(?:b(?:[hl])|h(?:[ls])))(?!-?[[:alpha:]])"
           }
           {include: "#music_notation"}
