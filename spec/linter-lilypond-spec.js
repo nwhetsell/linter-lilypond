@@ -19,7 +19,7 @@ describe("linter-lilypond", () => {
       fs.closeSync(file);
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
-          expect(messages).toBeNull();
+          expect(messages === null || messages.length === 0).toBe(true);
           fs.unlinkSync(filePath);
         }));
       }));
@@ -32,7 +32,7 @@ describe("linter-lilypond", () => {
       fs.closeSync(file);
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
-          expect(messages).toBeNull();
+          expect(messages === null || messages.length === 0).toBe(true);
           const outputFilePath = path.join(__dirname, "-.midi");
           expect(() => fs.unlinkSync(outputFilePath)).toThrow(`ENOENT: no such file or directory, unlink '${outputFilePath}'`);
           fs.unlinkSync(filePath);
@@ -88,7 +88,7 @@ describe("linter-lilypond", () => {
       fs.closeSync(file);
       waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
         waitsForPromise(() => lint(editor).then(messages => {
-          expect(messages).toBeNull();
+          expect(messages === null || messages.length === 0).toBe(true);
           const outputFileNames = [
             "--1.eps",
             "--1.pdf",
