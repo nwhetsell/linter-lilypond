@@ -11,6 +11,7 @@ install:
     if [ "$TRAVIS_OS_NAME" = 'osx' ]; then
       brew cask install mactex-no-gui
       brew tap nwhetsell/lilypond
+      brew install lilypond
       brew link --force guile@1
     else
       sudo apt-get --assume-yes install lilypond
