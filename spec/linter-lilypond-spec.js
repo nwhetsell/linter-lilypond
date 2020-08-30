@@ -817,7 +817,7 @@ EOS
     it("tokenizes built-in commands", () => {
       // To create the strings in the commands array, run:
       /*
-git clone https://github.com/lilypond/lilypond.git
+git clone https://git.savannah.gnu.org/git/lilypond.git
 cd lilypond
 git checkout stable/2.20
 python -c '
@@ -1328,7 +1328,7 @@ rm -fR lilypond
     it("tokenizes built-in markup commands", () => {
       // To create the strings in the commands array, run:
       /*
-git clone https://github.com/lilypond/lilypond.git
+git clone https://git.savannah.gnu.org/git/lilypond.git
 cd lilypond
 git checkout stable/2.20
 python -c '

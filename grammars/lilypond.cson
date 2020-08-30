@@ -187,7 +187,7 @@ print(regex_opt('"$LilyPond_keywords"', r"\\\\", r"(?!-?[[:alpha:]])"))
         name:  "support.function.lilypond"
         # To update this regex, run:
         ###
-git clone https://github.com/lilypond/lilypond.git
+git clone https://git.savannah.gnu.org/git/lilypond.git
 cd lilypond
 git checkout stable/2.20
 LilyPond_commands=$(python -c '
@@ -643,7 +643,7 @@ echo $additional_matches
         name:  "support.function.lilypond"
         # To update this regex, run:
         ###
-git clone https://github.com/lilypond/lilypond.git
+git clone https://git.savannah.gnu.org/git/lilypond.git
 cd lilypond
 git checkout stable/2.20
 markup_commands=$(python -c '
