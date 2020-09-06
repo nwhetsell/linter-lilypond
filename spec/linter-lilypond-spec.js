@@ -25,6 +25,23 @@ describe("linter-lilypond", () => {
       }));
     });
 
+    it("lints a file without a \\version statement", () => {
+      const filePath = path.join(__dirname, "test.ly");
+      const file = fs.openSync(filePath, "w");
+      fs.writeSync(file, "{ c' e' g' e' }");
+      fs.closeSync(file);
+      waitsForPromise(() => atom.workspace.open(filePath).then(editor => {
+        waitsForPromise(() => lint(editor).then(messages => {
+          expect(messages.length).toBe(1);
+          expect(messages[0].severity).toBe("warning");
+          expect(messages[0].excerpt).toMatch(/^no \\version statement found\b/);
+          expect(messages[0].location.file).toBe(filePath);
+          expect(messages[0].location.position).toEqual([[0, 0], [0, 0]]);
+          fs.unlinkSync(filePath);
+        }));
+      }));
+    });
+
     it("deletes output MIDI file", () => {
       const filePath = path.join(__dirname, "test.ly");
       const file = fs.openSync(filePath, "w");
