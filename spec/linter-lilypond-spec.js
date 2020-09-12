@@ -170,6 +170,14 @@ describe("linter-lilypond", () => {
       expect(tokens[7]).toEqual({value: '"', scopes: ["source.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
     });
 
+    it("tokenizes variables", () => {
+      const {tokens} = grammar.tokenizeLine("\\foo-bar \\foo-bar-baz");
+      expect(tokens.length).toBe(3);
+      expect(tokens[0]).toEqual({value: "\\foo-bar", scopes: ["source.lilypond", "variable.other.lilypond"]});
+      expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+      expect(tokens[2]).toEqual({value: "\\foo-bar-baz", scopes: ["source.lilypond", "variable.other.lilypond"]});
+    });
+
     it("tokenizes music expressions", () => {
       const lines = grammar.tokenizeLines(dedent`
         \\relative c' {

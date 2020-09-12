@@ -361,7 +361,7 @@ echo $additional_matches
 
       {
         name:  "variable.other.lilypond"
-        match: "\\\\[[:alpha:]]+(?:-[[:alpha:]]+)?"
+        match: "\\\\[[:alpha:]]+(?:-[[:alpha:]]+)*"
       }
     ]
 
