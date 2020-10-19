@@ -561,35 +561,32 @@ echo $additional_matches
         name:  "keyword.operator.articulation-direction-indicator.down.lilypond"
         match: "_"
       }
+      # https://lilypond.org/doc/Documentation/notation/common-notation-for-fretted-strings#string-number-indications
+      {
+        name:  "keyword.operator.string-number-indicator.lilypond"
+        match: "\\\\(?=\\d)"
+      }
     ]
 
   music_notation:
     patterns: [
       {include: "#chord_mode_notation"}
+      # https://lilypond.org/doc/Documentation/notation/direction-and-placement#articulation-direction-indicators
       # https://lilypond.org/doc/Documentation/notation/expressive-marks-attached-to-notes#articulations-and-ornamentations
       {
-        name:  "keyword.operator.articulation.marcato.lilypond"
-        match: "-\\^"
-      },{
-        name:  "keyword.operator.articulation.stopped.lilypond"
-        match: "-\\+"
-      },{
-        name:  "keyword.operator.articulation.tenuto.lilypond"
-        match: "--"
-      },{
-        name:  "keyword.operator.articulation.staccatissimo.lilypond"
-        match: "-!"
-      },{
-        name:  "keyword.operator.articulation.accent.lilypond"
-        match: "->"
-      },{
-        name:  "keyword.operator.articulation.staccato.lilypond"
-        match: "-\\."
-      },{
-        name:  "keyword.operator.articulation.portato.lilypond"
-        match: "-_"
+        match: "(?:(\\^)|(_)|(-))(?:(\\^)|(\\+)|(-)|(!)|(>)|(\\.)|(_))"
+        captures:
+          1:  name: "keyword.operator.articulation-direction-indicator.up.lilypond"
+          2:  name: "keyword.operator.articulation-direction-indicator.down.lilypond"
+          3:  name: "keyword.operator.articulation-direction-indicator.default.lilypond"
+          4:  name: "keyword.operator.articulation.marcato.lilypond"
+          5:  name: "keyword.operator.articulation.stopped.lilypond"
+          6:  name: "keyword.operator.articulation.tenuto.lilypond"
+          7:  name: "keyword.operator.articulation.staccatissimo.lilypond"
+          8:  name: "keyword.operator.articulation.accent.lilypond"
+          9:  name: "keyword.operator.articulation.staccato.lilypond"
+          10: name: "keyword.operator.articulation.portato.lilypond"
       }
-      # https://lilypond.org/doc/Documentation/notation/direction-and-placement#articulation-direction-indicators
       {
         name:  "keyword.operator.articulation-direction-indicator.up.lilypond"
         match: "\\^"

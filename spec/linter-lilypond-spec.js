@@ -186,7 +186,7 @@ describe("linter-lilypond", () => {
           r8 c[ r c] s2 | R1
           c8-^ c-+ c-- c-! c-> c-. c4-_
           c\\< c\\! c\\> c\\!
-          <c e-> g>2q
+          <c e-> g\\1>2q
           << e1 \\\\ c >>
           c8( c) c\\( c\\) c\\=1( c\\=1) c\\=%{%}"label"\\( c\\="label"%{%}\\)
           \\[ c2 c \\]
@@ -272,30 +272,37 @@ describe("linter-lilypond", () => {
       expect(tokens[18]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
 
       tokens = lines[4];
-      expect(tokens.length).toBe(23);
+      expect(tokens.length).toBe(30);
       expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
       expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
       expect(tokens[2]).toEqual({value: "8", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[3]).toEqual({value: "-^", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.marcato.lilypond"]});
-      expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[5]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[6]).toEqual({value: "-+", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.stopped.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[9]).toEqual({value: "--", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.tenuto.lilypond"]});
-      expect(tokens[10]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[11]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[12]).toEqual({value: "-!", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.staccatissimo.lilypond"]});
+      expect(tokens[3]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[4]).toEqual({value: "^", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.marcato.lilypond"]});
+      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
+      expect(tokens[6]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
+      expect(tokens[7]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[8]).toEqual({value: "+", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.stopped.lilypond"]});
+      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
+      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
+      expect(tokens[11]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[12]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.tenuto.lilypond"]});
       expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
       expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[15]).toEqual({value: "->", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.accent.lilypond"]});
-      expect(tokens[16]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[17]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[18]).toEqual({value: "-.", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.staccato.lilypond"]});
-      expect(tokens[19]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[20]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[21]).toEqual({value: "4", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[22]).toEqual({value: "-_", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.portato.lilypond"]});
+      expect(tokens[15]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[16]).toEqual({value: "!", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.staccatissimo.lilypond"]});
+      expect(tokens[17]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
+      expect(tokens[18]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
+      expect(tokens[19]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[20]).toEqual({value: ">", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.accent.lilypond"]});
+      expect(tokens[21]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
+      expect(tokens[22]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
+      expect(tokens[23]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[24]).toEqual({value: ".", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.staccato.lilypond"]});
+      expect(tokens[25]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
+      expect(tokens[26]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
+      expect(tokens[27]).toEqual({value: "4", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[28]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[29]).toEqual({value: "_", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.portato.lilypond"]});
 
       tokens = lines[5];
       expect(tokens.length).toBe(12);
@@ -313,18 +320,21 @@ describe("linter-lilypond", () => {
       expect(tokens[11]).toEqual({value: "\\!", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.dynamic-mark.end.lilypond"]});
 
       tokens = lines[6];
-      expect(tokens.length).toBe(11);
+      expect(tokens.length).toBe(14);
       expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
       expect(tokens[1]).toEqual({value: "<", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "punctuation.definition.chord.begin.lilypond"]});
       expect(tokens[2]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "support.variable.note-name.lilypond"]});
       expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond"]});
       expect(tokens[4]).toEqual({value: "e", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[5]).toEqual({value: "->", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "keyword.operator.articulation.accent.lilypond"]});
-      expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond"]});
-      expect(tokens[7]).toEqual({value: "g", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[8]).toEqual({value: ">", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "punctuation.definition.chord.end.lilypond"]});
-      expect(tokens[9]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[10]).toEqual({value: "q", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.chord-repetition.lilypond"]});
+      expect(tokens[5]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
+      expect(tokens[6]).toEqual({value: ">", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "keyword.operator.articulation.accent.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond"]});
+      expect(tokens[8]).toEqual({value: "g", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "support.variable.note-name.lilypond"]});
+      expect(tokens[9]).toEqual({value: "\\", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "keyword.operator.string-number-indicator.lilypond"]});
+      expect(tokens[10]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[11]).toEqual({value: ">", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "punctuation.definition.chord.end.lilypond"]});
+      expect(tokens[12]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[13]).toEqual({value: "q", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.chord-repetition.lilypond"]});
 
       tokens = lines[7];
       expect(tokens.length).toBe(11);
