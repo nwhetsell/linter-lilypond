@@ -12,8 +12,6 @@ install:
       brew cask install mactex-no-gui
       brew tap nwhetsell/lilypond
       brew install lilypond
-      brew unlink guile
-      brew link --force guile@1
     else
       sudo apt-get --assume-yes install lilypond
     fi
