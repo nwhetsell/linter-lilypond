@@ -570,23 +570,28 @@ echo $additional_matches
 
   music_notation:
     patterns: [
-      {include: "#chord_mode_notation"}
       # https://lilypond.org/doc/Documentation/notation/direction-and-placement#articulation-direction-indicators
       # https://lilypond.org/doc/Documentation/notation/expressive-marks-attached-to-notes#articulations-and-ornamentations
       {
-        match: "(?:(\\^)|(_)|(-))(?:(\\^)|(\\+)|(-)|(!)|(>)|(\\.)|(_))"
-        captures:
+        begin: "(\\^)|(_)|(-)"
+        end:   "(\\^)|(\\+)|(-)|(!)|(>)|(\\.)|(_)|(?=[^\\s%])"
+        beginCaptures:
           1:  name: "keyword.operator.articulation-direction-indicator.up.lilypond"
           2:  name: "keyword.operator.articulation-direction-indicator.down.lilypond"
           3:  name: "keyword.operator.articulation-direction-indicator.default.lilypond"
-          4:  name: "keyword.operator.articulation.marcato.lilypond"
-          5:  name: "keyword.operator.articulation.stopped.lilypond"
-          6:  name: "keyword.operator.articulation.tenuto.lilypond"
-          7:  name: "keyword.operator.articulation.staccatissimo.lilypond"
-          8:  name: "keyword.operator.articulation.accent.lilypond"
-          9:  name: "keyword.operator.articulation.staccato.lilypond"
-          10: name: "keyword.operator.articulation.portato.lilypond"
+        endCaptures:
+          1: name: "keyword.operator.articulation.marcato.lilypond"
+          2: name: "keyword.operator.articulation.stopped.lilypond"
+          3: name: "keyword.operator.articulation.tenuto.lilypond"
+          4: name: "keyword.operator.articulation.staccatissimo.lilypond"
+          5: name: "keyword.operator.articulation.accent.lilypond"
+          6: name: "keyword.operator.articulation.staccato.lilypond"
+          7: name: "keyword.operator.articulation.portato.lilypond"
+        patterns: [
+          {include: "#comments"}
+        ]
       }
+      {include: "#chord_mode_notation"}
       {
         name:  "keyword.operator.articulation-direction-indicator.up.lilypond"
         match: "\\^"
