@@ -1,7 +1,7 @@
 {
   "name": "linter-lilypond",
   "main": "./lib/linter-lilypond",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Highlight and lint LilyPond files",
   "keywords": [
     "lilypond",
