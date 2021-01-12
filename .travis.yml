@@ -9,7 +9,7 @@ os:
 install:
   - |
     if [ "$TRAVIS_OS_NAME" = 'osx' ]; then
-      brew cask install mactex-no-gui
+      brew install --cask mactex-no-gui
       brew tap nwhetsell/lilypond
       brew install lilypond
     else
