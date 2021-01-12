@@ -4,16 +4,8 @@ language: generic
 
 os:
   - linux
-  - osx
 
 install:
-  - |
-    if [ "$TRAVIS_OS_NAME" = 'osx' ]; then
-      brew install --cask mactex-no-gui
-      brew tap nwhetsell/lilypond
-      brew install lilypond
-    else
-      sudo apt-get --assume-yes install lilypond
-    fi
+  - sudo apt-get --assume-yes install lilypond
 
 script: curl --show-error --silent https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh
