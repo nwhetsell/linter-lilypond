@@ -14,10 +14,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - name: Check out repository
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
     - name: Set up Atom
-    - uses: UziTech/action-setup-atom@v2
+      uses: UziTech/action-setup-atom@v2
       with:
         version: ${{ matrix.channel }}
 
