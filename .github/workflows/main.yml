@@ -27,10 +27,7 @@ jobs:
         sudo sh lilypond-2.22.1-1.linux-64.sh --batch
       if: ${{ matrix.os == 'ubuntu-latest' }}
     - name: Install LilyPond on macOS
-      run: |
-        brew install --cask mactex-no-gui
-        brew tap nwhetsell/lilypond
-        brew install lilypond
+      run: brew update && brew install lilypond
       if: ${{ matrix.os == 'macos-latest' }}
 
     - name: Install package dependencies
