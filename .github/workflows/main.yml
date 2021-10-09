@@ -23,8 +23,8 @@ jobs:
 
     - name: Install LilyPond on Linux
       run: |
-        wget --no-verbose https://lilypond.org/download/binaries/linux-64/lilypond-2.22.0-1.linux-64.sh
-        sudo sh lilypond-2.22.0-1.linux-64.sh --batch
+        wget --no-verbose https://lilypond.org/download/binaries/linux-64/lilypond-2.22.1-1.linux-64.sh
+        sudo sh lilypond-2.22.1-1.linux-64.sh --batch
       if: ${{ matrix.os == 'ubuntu-latest' }}
     - name: Install LilyPond on macOS
       run: |
