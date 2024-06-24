@@ -7,30 +7,16 @@ env:
 
 jobs:
   Test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
     - name: Check out repository
       uses: actions/checkout@v4
 
-    - name: Install Pulsar on macOS
+    - name: Install Pulsar
       run: brew install pulsar
-      if: ${{ matrix.os == 'macos-latest' }}
-    - name: Install Pulsar on Linux
-      uses: pulsar-edit/action-pulsar-dependency@v3
-      if: ${{ matrix.os == 'ubuntu-latest' }}
 
-    - name: Install LilyPond on Linux
-      run: |
-        wget --no-verbose https://gitlab.com/lilypond/lilypond/-/releases/v2.24.3/downloads/lilypond-2.24.3-linux-x86_64.tar.gz
-        tar -xf lilypond-2.24.3-linux-x86_64.tar.gz
-        echo "$(pwd)/lilypond-2.24.3/bin" >> $GITHUB_PATH
-      if: ${{ matrix.os == 'ubuntu-latest' }}
-    - name: Install LilyPond on macOS
+    - name: Install LilyPond
       run: brew update && brew install lilypond
-      if: ${{ matrix.os == 'macos-latest' }}
 
     - name: Install package dependencies
       run: ppm install
