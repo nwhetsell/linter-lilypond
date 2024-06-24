@@ -10,28 +10,32 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        channel: [stable, beta]
     runs-on: ${{ matrix.os }}
     steps:
     - name: Check out repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Set up Atom
-      uses: UziTech/action-setup-atom@v2
-      with:
-        version: ${{ matrix.channel }}
+    - name: Install Pulsar on macOS
+      run: brew install pulsar
+      if: ${{ matrix.os == 'macos-latest' }}
+    - name: Install Pulsar on Linux
+      uses: pulsar-edit/action-pulsar-dependency@v3
+      if: ${{ matrix.os == 'ubuntu-latest' }}
 
     - name: Install LilyPond on Linux
       run: |
-        wget --no-verbose https://lilypond.org/download/binaries/linux-64/lilypond-2.22.1-1.linux-64.sh
-        sudo sh lilypond-2.22.1-1.linux-64.sh --batch
+        wget --no-verbose https://gitlab.com/lilypond/lilypond/-/releases/v2.24.3/downloads/lilypond-2.24.3-linux-x86_64.tar.gz
+        tar -xf lilypond-2.24.3-linux-x86_64.tar.gz
+        echo "$(pwd)/lilypond-2.24.3/bin" >> $GITHUB_PATH
       if: ${{ matrix.os == 'ubuntu-latest' }}
     - name: Install LilyPond on macOS
       run: brew update && brew install lilypond
       if: ${{ matrix.os == 'macos-latest' }}
 
     - name: Install package dependencies
-      run: apm install
+      run: ppm install
 
     - name: Run tests
-      run: atom --test spec
+      uses: coactions/setup-xvfb@v1
+      with:
+        run: pulsar --test spec

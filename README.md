@@ -1,5 +1,5 @@
 # LilyPond Linting in Atom
 
-[![apm](https://img.shields.io/apm/dm/linter-lilypond.svg)](https://atom.io/packages/linter-lilypond)
+[![Actions](https://github.com/nwhetsell/linter-lilypond/workflows/CI/badge.svg)](https://github.com/nwhetsell/linter-lilypond/actions?workflow=CI)
 
-This [Atom](https://atom.io) package adds syntax highlighting and syntax checking for [LilyPond](https://lilypond.org) files.
+This [Pulsar](https://pulsar-edit.dev) package adds syntax highlighting and syntax checking for [LilyPond](https://lilypond.org) files.

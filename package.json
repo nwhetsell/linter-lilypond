@@ -2,7 +2,7 @@
   "name": "linter-lilypond",
   "main": "./lib/linter-lilypond",
   "version": "1.0.9",
-  "description": "Highlight and lint LilyPond files",
+  "description": "Highlight and lint LilyPond files in Pulsar and Atom forks",
   "keywords": [
     "lilypond",
     "music"
