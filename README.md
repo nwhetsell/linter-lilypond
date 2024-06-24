@@ -1,4 +1,4 @@
-# LilyPond Linting in Atom
+# LilyPond Linting in Pulsar and Atom Forks
 
 [![Actions](https://github.com/nwhetsell/linter-lilypond/workflows/CI/badge.svg)](https://github.com/nwhetsell/linter-lilypond/actions?workflow=CI)
 
