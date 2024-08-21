@@ -1,7 +1,7 @@
 {
   "name": "linter-lilypond",
   "main": "./lib/linter-lilypond",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "Highlight and lint LilyPond files in Pulsar and Atom forks",
   "keywords": [
     "lilypond",
