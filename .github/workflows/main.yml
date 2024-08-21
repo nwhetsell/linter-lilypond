@@ -2,9 +2,6 @@ name: CI
 
 on: [push, pull_request]
 
-env:
-  CI: true
-
 jobs:
   Test:
     strategy:
@@ -15,21 +12,21 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
 
-    - name: Install Pulsar on macOS
-      run: brew install pulsar
-      if: ${{ matrix.os == 'macos-latest' }}
     - name: Install Pulsar on Linux
       uses: pulsar-edit/action-pulsar-dependency@v3
       if: ${{ matrix.os == 'ubuntu-latest' }}
+    - name: Install Pulsar on macOS
+      run: brew install pulsar
+      if: ${{ matrix.os == 'macos-latest' }}
 
     - name: Install LilyPond on Linux
       run: |
-        wget --no-verbose https://gitlab.com/lilypond/lilypond/-/releases/v2.24.3/downloads/lilypond-2.24.3-linux-x86_64.tar.gz
-        tar -xf lilypond-2.24.3-linux-x86_64.tar.gz
-        echo "$(pwd)/lilypond-2.24.3/bin" >> $GITHUB_PATH
+        wget --no-verbose https://gitlab.com/lilypond/lilypond/-/releases/v2.24.4/downloads/lilypond-2.24.4-linux-x86_64.tar.gz
+        tar -xf lilypond-2.24.4-linux-x86_64.tar.gz
+        echo "$(pwd)/lilypond-2.24.4/bin" >> $GITHUB_PATH
       if: ${{ matrix.os == 'ubuntu-latest' }}
     - name: Install LilyPond on macOS
-      run: brew update && brew install lilypond
+      run: brew install lilypond
       if: ${{ matrix.os == 'macos-latest' }}
 
     - name: Install package dependencies

@@ -1,18 +1,20 @@
 const dedent = require("dedent-js");
 const fs = require("fs");
 const path = require("path");
+const process = require("process");
 
 const lint = require("../lib/linter-lilypond").provideLinter().lint;
 
 describe("linter-lilypond", () => {
-  const preamble = '\\version "2.22.0"\n';
+  const preamble = '\\version "2.24.4"\n';
 
   beforeEach(() => {
     waitsForPromise(() => atom.packages.activatePackage("linter-lilypond"));
   });
 
   // These tests pass locally, but not on GitHub Actions.
-  /*
+  if (process.env.CI !== "true") {
+
   describe("LilyPond linter", () => {
     it("lints a valid file", () => {
       const filePath = path.join(__dirname, "test.ly");
@@ -125,7 +127,8 @@ describe("linter-lilypond", () => {
       }));
     });
   });
-  */
+
+  }
 
   describe("LilyPond grammar", () => {
     let grammar;
