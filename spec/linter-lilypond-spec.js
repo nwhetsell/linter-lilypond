@@ -203,344 +203,350 @@ describe("linter-lilypond", () => {
 
       let tokens = lines[0];
       expect(tokens.length).toBe(6);
-      expect(tokens[0]).toEqual({value: "\\relative", scopes: ["source.lilypond", "meta.relative.lilypond", "support.function.lilypond"]});
-      expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond"]});
-      expect(tokens[2]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[3]).toEqual({value: "'", scopes: ["source.lilypond", "meta.relative.lilypond", "keyword.operator.transpose-octave.up.lilypond"]});
-      expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond"]});
-      expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
+      expect(tokens[0]).toEqual({value: "\\relative", scopes: ["source.lilypond", "support.function.lilypond"]});
+      expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+      expect(tokens[2]).toEqual({value: "c", scopes: ["source.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[3]).toEqual({value: "'", scopes: ["source.lilypond", "punctuation.apostrophe.lilypond"]});
+      expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond"]});
+      expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
 
       tokens = lines[1];
       expect(tokens.length).toBe(18);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[2]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[4]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[6]).toEqual({value: "4", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[8]).toEqual({value: "8", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[10]).toEqual({value: "16", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[12]).toEqual({value: "32", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[14]).toEqual({value: "64", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[15]).toEqual({value: ".", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.dot.lilypond"]});
-      expect(tokens[16]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[17]).toEqual({value: "128", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[2]).toEqual({value: "1", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[4]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[6]).toEqual({value: "4", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[8]).toEqual({value: "8", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[10]).toEqual({value: "16", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[12]).toEqual({value: "32", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[14]).toEqual({value: "64", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[15]).toEqual({value: ".", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.dot.lilypond"]});
+      expect(tokens[16]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[17]).toEqual({value: "128", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
 
       tokens = lines[2];
       expect(tokens.length).toBe(21);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[2]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[3]).toEqual({value: "*", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "keyword.operator.scale-duration.lilypond"]});
-      expect(tokens[4]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[5]).toEqual({value: "/", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "keyword.operator.forward-slash.lilypond"]});
-      expect(tokens[6]).toEqual({value: "3", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[9]).toEqual({value: "~", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.tie.lilypond"]});
-      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[12]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[13]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[14]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[15]).toEqual({value: "*", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "keyword.operator.scale-duration.lilypond"]});
-      expect(tokens[16]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-      expect(tokens[17]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-      expect(tokens[18]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.duration-scale.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[19]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-      expect(tokens[20]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[2]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[3]).toEqual({value: "*", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.multiplication.lilypond"]});
+      expect(tokens[4]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[5]).toEqual({value: "/", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.forward-slash.lilypond"]});
+      expect(tokens[6]).toEqual({value: "3", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[9]).toEqual({value: "~", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.tilde.lilypond"]});
+      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[12]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[13]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[14]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[15]).toEqual({value: "*", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.multiplication.lilypond"]});
+      expect(tokens[16]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.expression-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
+      expect(tokens[17]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.expression-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
+      expect(tokens[18]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[19]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.expression-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
+      expect(tokens[20]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.expression-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
 
       tokens = lines[3];
       expect(tokens.length).toBe(19);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "r", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.rest.lilypond"]});
-      expect(tokens[2]).toEqual({value: "8", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[4]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[5]).toEqual({value: "[", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.beam.begin.lilypond"]});
-      expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[7]).toEqual({value: "r", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.rest.lilypond"]});
-      expect(tokens[8]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[9]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[10]).toEqual({value: "]", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.beam.end.lilypond"]});
-      expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[12]).toEqual({value: "s", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.rest.lilypond"]});
-      expect(tokens[13]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[14]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[15]).toEqual({value: "|", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.bar-check.lilypond"]});
-      expect(tokens[16]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[17]).toEqual({value: "R", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.rest.lilypond"]});
-      expect(tokens[18]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "r", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.rest.lilypond"]});
+      expect(tokens[2]).toEqual({value: "8", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[4]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[5]).toEqual({value: "[", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.beam.begin.lilypond"]});
+      expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[7]).toEqual({value: "r", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.rest.lilypond"]});
+      expect(tokens[8]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[9]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[10]).toEqual({value: "]", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.beam.end.lilypond"]});
+      expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[12]).toEqual({value: "s", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.rest.lilypond"]});
+      expect(tokens[13]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[14]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[15]).toEqual({value: "|", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.bar-check.lilypond"]});
+      expect(tokens[16]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[17]).toEqual({value: "R", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.rest.lilypond"]});
+      expect(tokens[18]).toEqual({value: "1", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
 
       tokens = lines[4];
       expect(tokens.length).toBe(30);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[2]).toEqual({value: "8", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[3]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[4]).toEqual({value: "^", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.marcato.lilypond"]});
-      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[6]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[7]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[8]).toEqual({value: "+", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.stopped.lilypond"]});
-      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[11]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[12]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.tenuto.lilypond"]});
-      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[15]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[16]).toEqual({value: "!", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.staccatissimo.lilypond"]});
-      expect(tokens[17]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[18]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[19]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[20]).toEqual({value: ">", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.accent.lilypond"]});
-      expect(tokens[21]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[22]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[23]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[24]).toEqual({value: ".", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.staccato.lilypond"]});
-      expect(tokens[25]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[26]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[27]).toEqual({value: "4", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[28]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[29]).toEqual({value: "_", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation.portato.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[2]).toEqual({value: "8", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[3]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[4]).toEqual({value: "^", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.caret.lilypond"]});
+      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[6]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[7]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[8]).toEqual({value: "+", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.plus-sign.lilypond"]});
+      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[11]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[12]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[15]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[16]).toEqual({value: "!", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.exclamation-point.lilypond"]});
+      expect(tokens[17]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[18]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[19]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[20]).toEqual({value: ">", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.greater-than-sign.lilypond"]});
+      expect(tokens[21]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[22]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[23]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[24]).toEqual({value: ".", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.dot.lilypond"]});
+      expect(tokens[25]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[26]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[27]).toEqual({value: "4", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[28]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[29]).toEqual({value: "_", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.underscore.lilypond"]});
 
       tokens = lines[5];
       expect(tokens.length).toBe(12);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[2]).toEqual({value: "\\<", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.dynamic-mark.begin.crescendo.lilypond"]});
-      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[4]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[5]).toEqual({value: "\\!", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.dynamic-mark.end.lilypond"]});
-      expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[7]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[8]).toEqual({value: "\\>", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.dynamic-mark.begin.decrescendo.lilypond"]});
-      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[11]).toEqual({value: "\\!", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.dynamic-mark.end.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[2]).toEqual({value: "\\<", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.dynamic-mark.begin.crescendo.lilypond"]});
+      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[4]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[5]).toEqual({value: "\\!", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.dynamic-mark.end.lilypond"]});
+      expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[7]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[8]).toEqual({value: "\\>", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.dynamic-mark.begin.decrescendo.lilypond"]});
+      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[11]).toEqual({value: "\\!", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.dynamic-mark.end.lilypond"]});
 
       tokens = lines[6];
       expect(tokens.length).toBe(14);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "<", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "punctuation.definition.chord.begin.lilypond"]});
-      expect(tokens[2]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond"]});
-      expect(tokens[4]).toEqual({value: "e", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[5]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[6]).toEqual({value: ">", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "keyword.operator.articulation.accent.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond"]});
-      expect(tokens[8]).toEqual({value: "g", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[9]).toEqual({value: "\\", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "keyword.operator.string-number-indicator.lilypond"]});
-      expect(tokens[10]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[11]).toEqual({value: ">", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.chord.lilypond", "punctuation.definition.chord.end.lilypond"]});
-      expect(tokens[12]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[13]).toEqual({value: "q", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.chord-repetition.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "<", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "punctuation.definition.chord.begin.lilypond"]});
+      expect(tokens[2]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond"]});
+      expect(tokens[4]).toEqual({value: "e", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[5]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[6]).toEqual({value: ">", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "punctuation.greater-than-sign.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond"]});
+      expect(tokens[8]).toEqual({value: "g", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[9]).toEqual({value: "\\", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "keyword.operator.string-number-indicator.lilypond"]});
+      expect(tokens[10]).toEqual({value: "1", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[11]).toEqual({value: ">", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.chord.lilypond", "punctuation.definition.chord.end.lilypond"]});
+      expect(tokens[12]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[13]).toEqual({value: "q", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.chord-repetition.lilypond"]});
 
       tokens = lines[7];
       expect(tokens.length).toBe(11);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "<<", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond", "punctuation.simultaneous-expressions.begin.lilypond"]});
-      expect(tokens[2]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond"]});
-      expect(tokens[3]).toEqual({value: "e", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[4]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond"]});
-      expect(tokens[6]).toEqual({value: "\\\\", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond", "meta.separator.simultaneous-expressions.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond"]});
-      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond"]});
-      expect(tokens[10]).toEqual({value: ">>", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.simultaneous-expressions.lilypond", "punctuation.simultaneous-expressions.end.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "<<", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond", "punctuation.simultaneous-expressions.begin.lilypond"]});
+      expect(tokens[2]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond"]});
+      expect(tokens[3]).toEqual({value: "e", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[4]).toEqual({value: "1", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond"]});
+      expect(tokens[6]).toEqual({value: "\\\\", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond", "meta.separator.simultaneous-expressions.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond"]});
+      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond"]});
+      expect(tokens[10]).toEqual({value: ">>", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.simultaneous-expressions.lilypond", "punctuation.simultaneous-expressions.end.lilypond"]});
 
       tokens = lines[8];
       expect(tokens.length).toBe(41);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[2]).toEqual({value: "8", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[3]).toEqual({value: "(", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.slur.begin.lilypond"]});
-      expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[5]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[6]).toEqual({value: ")", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.slur.end.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[9]).toEqual({value: "\\(", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.phrasing-slur.begin.lilypond"]});
-      expect(tokens[10]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[11]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[12]).toEqual({value: "\\)", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.phrasing-slur.end.lilypond"]});
-      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[15]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
-      expect(tokens[16]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "entity.name.slur-label.lilypond"]});
-      expect(tokens[17]).toEqual({value: "(", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.slur.begin.lilypond"]});
-      expect(tokens[18]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[19]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[20]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
-      expect(tokens[21]).toEqual({value: "1", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "entity.name.slur-label.lilypond"]});
-      expect(tokens[22]).toEqual({value: ")", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.slur.end.lilypond"]});
-      expect(tokens[23]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[24]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[25]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
-      expect(tokens[26]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-      expect(tokens[27]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-      expect(tokens[28]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
-      expect(tokens[29]).toEqual({value: "label", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "string.lilypond", "entity.name.slur-label.lilypond"]});
-      expect(tokens[30]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
-      expect(tokens[31]).toEqual({value: "\\(", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.phrasing-slur.begin.lilypond"]});
-      expect(tokens[32]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[33]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[34]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
-      expect(tokens[35]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
-      expect(tokens[36]).toEqual({value: "label", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "string.lilypond", "entity.name.slur-label.lilypond"]});
-      expect(tokens[37]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
-      expect(tokens[38]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-      expect(tokens[39]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-      expect(tokens[40]).toEqual({value: "\\)", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.phrasing-slur.end.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[2]).toEqual({value: "8", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[3]).toEqual({value: "(", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.slur.begin.lilypond"]});
+      expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[5]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[6]).toEqual({value: ")", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.slur.end.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[9]).toEqual({value: "\\(", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.phrasing-slur.begin.lilypond"]});
+      expect(tokens[10]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[11]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[12]).toEqual({value: "\\)", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.phrasing-slur.end.lilypond"]});
+      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[15]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
+      expect(tokens[16]).toEqual({value: "1", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "entity.name.slur-label.lilypond"]});
+      expect(tokens[17]).toEqual({value: "(", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.slur.begin.lilypond"]});
+      expect(tokens[18]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[19]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[20]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
+      expect(tokens[21]).toEqual({value: "1", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "entity.name.slur-label.lilypond"]});
+      expect(tokens[22]).toEqual({value: ")", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.slur.end.lilypond"]});
+      expect(tokens[23]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[24]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[25]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
+      expect(tokens[26]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
+      expect(tokens[27]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
+      expect(tokens[28]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
+      expect(tokens[29]).toEqual({value: "label", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "string.lilypond", "entity.name.slur-label.lilypond"]});
+      expect(tokens[30]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
+      expect(tokens[31]).toEqual({value: "\\(", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.phrasing-slur.begin.lilypond"]});
+      expect(tokens[32]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[33]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[34]).toEqual({value: "\\=", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "entity.punctuation.slur-label.lilypond"]});
+      expect(tokens[35]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
+      expect(tokens[36]).toEqual({value: "label", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "string.lilypond", "entity.name.slur-label.lilypond"]});
+      expect(tokens[37]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
+      expect(tokens[38]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
+      expect(tokens[39]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.slur-label.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
+      expect(tokens[40]).toEqual({value: "\\)", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.phrasing-slur.end.lilypond"]});
 
       tokens = lines[9];
       expect(tokens.length).toBe(9);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "\\[", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "invalid.deprecated.ligature.begin.lilypond"]});
-      expect(tokens[2]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[3]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[4]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[6]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[8]).toEqual({value: "\\]", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "invalid.deprecated.ligature.end.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "\\[", scopes: ["source.lilypond", "meta.expression-block.lilypond", "invalid.deprecated.ligature.begin.lilypond"]});
+      expect(tokens[2]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[3]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[4]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[6]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[8]).toEqual({value: "\\]", scopes: ["source.lilypond", "meta.expression-block.lilypond", "invalid.deprecated.ligature.end.lilypond"]});
 
       tokens = lines[10];
       expect(tokens.length).toBe(20);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[2]).toEqual({value: "4", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[3]).toEqual({value: "^", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.up.lilypond"]});
-      expect(tokens[4]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
-      expect(tokens[5]).toEqual({value: "up", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond"]});
-      expect(tokens[6]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
-      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[9]).toEqual({value: "_", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.down.lilypond"]});
-      expect(tokens[10]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
-      expect(tokens[11]).toEqual({value: "down", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond"]});
-      expect(tokens[12]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
-      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[15]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[16]).toEqual({value: "-", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.articulation-direction-indicator.default.lilypond"]});
-      expect(tokens[17]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
-      expect(tokens[18]).toEqual({value: "default", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond"]});
-      expect(tokens[19]).toEqual({value: '"', scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[2]).toEqual({value: "4", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[3]).toEqual({value: "^", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.caret.lilypond"]});
+      expect(tokens[4]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
+      expect(tokens[5]).toEqual({value: "up", scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond"]});
+      expect(tokens[6]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
+      expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[8]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[9]).toEqual({value: "_", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.underscore.lilypond"]});
+      expect(tokens[10]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
+      expect(tokens[11]).toEqual({value: "down", scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond"]});
+      expect(tokens[12]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
+      expect(tokens[13]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[15]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[16]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+      expect(tokens[17]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
+      expect(tokens[18]).toEqual({value: "default", scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond"]});
+      expect(tokens[19]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
 
       tokens = lines[11];
       expect(tokens.length).toBe(14);
-      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "ces", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[2]).toEqual({value: "'", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.transpose-octave.up.lilypond"]});
-      expect(tokens[3]).toEqual({value: "!", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.accidental.reminder.lilypond"]});
-      expect(tokens[4]).toEqual({value: "4", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
-      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[6]).toEqual({value: "ces", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[7]).toEqual({value: ",", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.transpose-octave.down.lilypond"]});
-      expect(tokens[8]).toEqual({value: "?", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.accidental.cautionary.lilypond"]});
-      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
-      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-      expect(tokens[11]).toEqual({value: "=", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.equals-sign.lilypond"]});
-      expect(tokens[12]).toEqual({value: "'", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "keyword.operator.transpose-octave.up.lilypond"]});
-      expect(tokens[13]).toEqual({value: "2", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[0]).toEqual({value: "  ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[1]).toEqual({value: "ces", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[2]).toEqual({value: "'", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.apostrophe.lilypond"]});
+      expect(tokens[3]).toEqual({value: "!", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.exclamation-point.lilypond"]});
+      expect(tokens[4]).toEqual({value: "4", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
+      expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[6]).toEqual({value: "ces", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[7]).toEqual({value: ",", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.comma.lilypond"]});
+      expect(tokens[8]).toEqual({value: "?", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.question-mark.lilypond"]});
+      expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+      expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+      expect(tokens[11]).toEqual({value: "=", scopes: ["source.lilypond", "meta.expression-block.lilypond", "keyword.operator.equals-sign.lilypond"]});
+      expect(tokens[12]).toEqual({value: "'", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.apostrophe.lilypond"]});
+      expect(tokens[13]).toEqual({value: "2", scopes: ["source.lilypond", "meta.expression-block.lilypond", "constant.numeric.integer.lilypond"]});
 
       tokens = lines[12];
       expect(tokens.length).toBe(1);
-      expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.relative.lilypond", "meta.music-expression.lilypond"]});
+      expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
     });
 
     it("tokenizes markup blocks", () => {
       for (const command of ["\\markup", "\\markuplist"]) {
-        let {tokens} = grammar.tokenizeLine(`${command} \\bold text `);
-        expect(tokens.length).toBe(6);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.markup-block.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[2]).toEqual({value: "\\bold", scopes: ["source.lilypond", "meta.markup-block.lilypond", "support.function.lilypond"]});
-        expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[4]).toEqual({value: "text", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        let {tokens} = grammar.tokenizeLine(`${command} \\bold text`);
+        expect(tokens.length).toBe(4);
+        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "keyword.other.lilypond"]});
+        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[2]).toEqual({value: "\\bold", scopes: ["source.lilypond", "support.function.markup.lilypond"]});
+        expect(tokens[3]).toEqual({value: " text", scopes: ["source.lilypond"]});
 
-        tokens = grammar.tokenizeLine(`${command} \\bold \\italic text `).tokens;
-        expect(tokens.length).toBe(8);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.markup-block.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[2]).toEqual({value: "\\bold", scopes: ["source.lilypond", "meta.markup-block.lilypond", "support.function.lilypond"]});
-        expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[4]).toEqual({value: "\\italic", scopes: ["source.lilypond", "meta.markup-block.lilypond", "support.function.lilypond"]});
-        expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[6]).toEqual({value: "text", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[7]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        tokens = grammar.tokenizeLine(`${command} \\bold \\italic text`).tokens;
+        expect(tokens.length).toBe(6);
+        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "keyword.other.lilypond"]});
+        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[2]).toEqual({value: "\\bold", scopes: ["source.lilypond", "support.function.markup.lilypond"]});
+        expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[4]).toEqual({value: "\\italic", scopes: ["source.lilypond", "support.function.markup.lilypond"]});
+        expect(tokens[5]).toEqual({value: " text", scopes: ["source.lilypond"]});
 
         tokens = grammar.tokenizeLine(`${command} %{%} { \\bold "text" }`).tokens;
         expect(tokens.length).toBe(14);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.markup-block.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[2]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.markup-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-        expect(tokens[3]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.markup-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-        expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[7]).toEqual({value: "\\bold", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "support.function.lilypond"]});
-        expect(tokens[8]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[9]).toEqual({value: '"', scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
-        expect(tokens[10]).toEqual({value: "text", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "string.lilypond"]});
-        expect(tokens[11]).toEqual({value: '"', scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
-        expect(tokens[12]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[13]).toEqual({value: "}", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
+        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "keyword.other.lilypond"]});
+        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[2]).toEqual({value: "%{", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
+        expect(tokens[3]).toEqual({value: "%}", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
+        expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[7]).toEqual({value: "\\bold", scopes: ["source.lilypond", "meta.expression-block.lilypond", "support.function.markup.lilypond"]});
+        expect(tokens[8]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[9]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.begin.lilypond"]});
+        expect(tokens[10]).toEqual({value: "text", scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond"]});
+        expect(tokens[11]).toEqual({value: '"', scopes: ["source.lilypond", "meta.expression-block.lilypond", "string.lilypond", "punctuation.definition.string.end.lilypond"]});
+        expect(tokens[12]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[13]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
 
         const lines = grammar.tokenizeLines(dedent`
           ${command} { \\bold { ten. \\italic dolce e semplice
           }}
         `);
         tokens = lines[0];
-        expect(tokens.length).toBe(10);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.markup-block.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[4]).toEqual({value: "\\bold", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "support.function.lilypond"]});
-        expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[6]).toEqual({value: "{", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[7]).toEqual({value: " ten. ", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[8]).toEqual({value: "\\italic", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond", "support.function.lilypond"]});
-        expect(tokens[9]).toEqual({value: " dolce e semplice", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
+        expect(tokens.length).toBe(14);
+        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "keyword.other.lilypond"]});
+        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[4]).toEqual({value: "\\bold", scopes: ["source.lilypond", "meta.expression-block.lilypond", "support.function.markup.lilypond"]});
+        expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[6]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[7]).toEqual({value: " ten", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[8]).toEqual({value: ".", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond", "punctuation.dot.lilypond"]});
+        expect(tokens[9]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[10]).toEqual({value: "\\italic", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond", "support.function.markup.lilypond"]});
+        expect(tokens[11]).toEqual({value: " dolce ", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[12]).toEqual({value: "e", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+        expect(tokens[13]).toEqual({value: " semplice", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond"]});
         tokens = lines[1];
         expect(tokens.length).toBe(2);
-        expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond", "meta.markup-expression.lilypond"]});
-        expect(tokens[1]).toEqual({value: "}", scopes: ["source.lilypond", "meta.markup-block.lilypond", "meta.markup-expression.lilypond"]});
+        expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[1]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
       }
     });
 
     it("tokenizes lyric mode", () => {
       for (const command of ["\\addlyrics", "\\lyricmode", "\\lyrics", "\\lyricsto"]) {
         let {tokens} = grammar.tokenizeLine(`${command} %{%} { a -- b_c~d __ _ }`);
-        expect(tokens.length).toBe(18);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.lyric-mode.lilypond"]});
-        expect(tokens[2]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-        expect(tokens[3]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-        expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.lyric-mode.lilypond"]});
-        expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[6]).toEqual({value: " a ", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[7]).toEqual({value: "--", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond", "keyword.operator.lyric.syllable-hyphen.lilypond"]});
-        expect(tokens[8]).toEqual({value: " b", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[9]).toEqual({value: "_", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond", "keyword.operator.lyric.syllable-space.lilypond"]});
-        expect(tokens[10]).toEqual({value: "c", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[11]).toEqual({value: "~", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond", "keyword.operator.lyric.tie.lilypond"]});
-        expect(tokens[12]).toEqual({value: "d ", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[13]).toEqual({value: "__", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond", "keyword.operator.lyric.extender-line.lilypond"]});
-        expect(tokens[14]).toEqual({value: " ", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[15]).toEqual({value: "_", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond", "keyword.operator.lyric.melisma.lilypond"]});
-        expect(tokens[16]).toEqual({value: " ", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[17]).toEqual({value: "}", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
+        expect(tokens.length).toBe(24);
+        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "keyword.other.lilypond"]});
+        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[2]).toEqual({value: "%{", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
+        expect(tokens[3]).toEqual({value: "%}", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
+        expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[7]).toEqual({value: "a", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+        expect(tokens[8]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[9]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+        expect(tokens[10]).toEqual({value: "-", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.hyphen.lilypond"]});
+        expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[12]).toEqual({value: "b", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+        expect(tokens[13]).toEqual({value: "_", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.underscore.lilypond"]});
+        expect(tokens[14]).toEqual({value: "c", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[15]).toEqual({value: "~", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.tilde.lilypond"]});
+        expect(tokens[16]).toEqual({value: "d", scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+        expect(tokens[17]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[18]).toEqual({value: "_", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.underscore.lilypond"]});
+        expect(tokens[19]).toEqual({value: "_", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.underscore.lilypond"]});
+        expect(tokens[20]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[21]).toEqual({value: "_", scopes: ["source.lilypond", "meta.expression-block.lilypond", "punctuation.underscore.lilypond"]});
+        expect(tokens[22]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+        expect(tokens[23]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
 
         const lines = grammar.tokenizeLines(dedent`
           ${command} {
@@ -548,46 +554,12 @@ describe("linter-lilypond", () => {
         `);
         tokens = lines[0];
         expect(tokens.length).toBe(3);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.lyric-mode.lilypond"]});
-        expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
+        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "keyword.other.lilypond"]});
+        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
         tokens = lines[1];
         expect(tokens.length).toBe(3);
-        expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.lyric-mode.lilypond", "meta.lyric-expression.lilypond"]});
-        expect(tokens[1]).toEqual({value: "%{", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-        expect(tokens[2]).toEqual({value: "%}", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-      }
-    });
-
-    it("tokenizes drum mode", () => {
-      for (const command of ["\\drummode", "\\drums"]) {
-        let {tokens} = grammar.tokenizeLine(`${command} %{%} { bassdrum c }`);
-        expect(tokens.length).toBe(10);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.drum-mode.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond"]});
-        expect(tokens[2]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-        expect(tokens[3]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-        expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond"]});
-        expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-        expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-        expect(tokens[7]).toEqual({value: "bassdrum", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond", "support.variable.percussion-note.lilypond"]});
-        expect(tokens[8]).toEqual({value: " c ", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-        expect(tokens[9]).toEqual({value: "}", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-
-        const lines = grammar.tokenizeLines(dedent`
-          ${command} { bassdrum
-          }%{%}
-        `);
-        tokens = lines[0];
-        expect(tokens.length).toBe(5);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.drum-mode.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond"]});
-        expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-        expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-        expect(tokens[4]).toEqual({value: "bassdrum", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond", "support.variable.percussion-note.lilypond"]});
-        tokens = lines[1];
-        expect(tokens.length).toBe(3);
-        expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
+        expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
         expect(tokens[1]).toEqual({value: "%{", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
         expect(tokens[2]).toEqual({value: "%}", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
       }
@@ -661,101 +633,12 @@ describe("linter-lilypond", () => {
       expect(tokens[2]).toEqual({value: "%}", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
     });
 
-    it("tokenizes figure mode", () => {
-      for (const command of ["\\figuremode", "\\figures"]) {
-        let {tokens} = grammar.tokenizeLine(`${command} %{%} { <1+%{%}2- _!> <4\\+ [5/ 6\\\\\\!]> }`);
-        expect(tokens.length).toBe(34);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.figure-mode.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond"]});
-        expect(tokens[2]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-        expect(tokens[3]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-        expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond"]});
-        expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond"]});
-        expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond"]});
-        expect(tokens[7]).toEqual({value: "<", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "punctuation.definition.figure-group.begin.lilypond"]});
-        expect(tokens[8]).toEqual({value: "1", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "constant.numeric.integer.lilypond"]});
-        expect(tokens[9]).toEqual({value: "+", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "keyword.operator.figure.accidental.sharp.lilypond"]});
-        expect(tokens[10]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-        expect(tokens[11]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-        expect(tokens[12]).toEqual({value: "2", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "constant.numeric.integer.lilypond"]});
-        expect(tokens[13]).toEqual({value: "-", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "keyword.operator.figure.accidental.flat.lilypond"]});
-        expect(tokens[14]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond"]});
-        expect(tokens[15]).toEqual({value: "_", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "support.variable.figure.hidden-third.lilypond"]});
-        expect(tokens[16]).toEqual({value: "!", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "keyword.operator.figure.accidental.natural.lilypond"]});
-        expect(tokens[17]).toEqual({value: ">", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "punctuation.definition.figure-group.end.lilypond"]});
-        expect(tokens[18]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond"]});
-        expect(tokens[19]).toEqual({value: "<", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "punctuation.definition.figure-group.begin.lilypond"]});
-        expect(tokens[20]).toEqual({value: "4", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "constant.numeric.integer.lilypond"]});
-        expect(tokens[21]).toEqual({value: "\\+", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "keyword.operator.figure.augmented.lilypond"]});
-        expect(tokens[22]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond"]});
-        expect(tokens[23]).toEqual({value: "[", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond", "punctuation.definition.figure-bracket.begin.lilypond"]});
-        expect(tokens[24]).toEqual({value: "5", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond", "constant.numeric.integer.lilypond"]});
-        expect(tokens[25]).toEqual({value: "/", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond", "keyword.operator.figure.diminished.lilypond"]});
-        expect(tokens[26]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond"]});
-        expect(tokens[27]).toEqual({value: "6", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond", "constant.numeric.integer.lilypond"]});
-        expect(tokens[28]).toEqual({value: "\\\\", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond", "keyword.operator.figure.raised-sixth.lilypond"]});
-        expect(tokens[29]).toEqual({value: "\\!", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond", "keyword.operator.figure.end-continuation-line.lilypond"]});
-        expect(tokens[30]).toEqual({value: "]", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "meta.figure-bracket.lilypond", "punctuation.definition.figure-bracket.end.lilypond"]});
-        expect(tokens[31]).toEqual({value: ">", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond", "meta.figure-group.lilypond", "punctuation.definition.figure-group.end.lilypond"]});
-        expect(tokens[32]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond"]});
-        expect(tokens[33]).toEqual({value: "}", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond"]});
-
-        const lines = grammar.tokenizeLines(dedent`
-          ${command} {
-          }%{%}
-        `);
-        tokens = lines[0];
-        expect(tokens.length).toBe(3);
-        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.figure-mode.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.figure-mode.lilypond"]});
-        expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond"]});
-        tokens = lines[1];
-        expect(tokens.length).toBe(3);
-        expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.figure-mode.lilypond", "meta.figure-expression.lilypond"]});
-        expect(tokens[1]).toEqual({value: "%{", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-        expect(tokens[2]).toEqual({value: "%}", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-      }
-    });
-
-    it("tokenizes \\paper blocks", () => {
-      let {tokens} = grammar.tokenizeLine("\\paper %{%} { \\cm\\mm\\in\\pt }");
-      expect(tokens.length).toBe(13);
-      expect(tokens[0]).toEqual({value: "\\paper", scopes: ["source.lilypond", "meta.paper-block.lilypond", "keyword.other.lilypond"]});
-      expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.paper-block.lilypond"]});
-      expect(tokens[2]).toEqual({value: "%{", scopes: ["source.lilypond", "meta.paper-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-      expect(tokens[3]).toEqual({value: "%}", scopes: ["source.lilypond", "meta.paper-block.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-      expect(tokens[4]).toEqual({value: " ", scopes: ["source.lilypond", "meta.paper-block.lilypond"]});
-      expect(tokens[5]).toEqual({value: "{", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond"]});
-      expect(tokens[6]).toEqual({value: " ", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond"]});
-      expect(tokens[7]).toEqual({value: "\\cm", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond", "support.constant.lilypond"]});
-      expect(tokens[8]).toEqual({value: "\\mm", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond", "support.constant.lilypond"]});
-      expect(tokens[9]).toEqual({value: "\\in", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond", "support.constant.lilypond"]});
-      expect(tokens[10]).toEqual({value: "\\pt", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond", "support.constant.lilypond"]});
-      expect(tokens[11]).toEqual({value: " ", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond"]});
-      expect(tokens[12]).toEqual({value: "}", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond"]});
-
-      const lines = grammar.tokenizeLines(dedent`
-        \\paper {
-        }%{%}
-      `);
-      tokens = lines[0];
-      expect(tokens.length).toBe(3);
-      expect(tokens[0]).toEqual({value: "\\paper", scopes: ["source.lilypond", "meta.paper-block.lilypond", "keyword.other.lilypond"]});
-      expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.paper-block.lilypond"]});
-      expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond"]});
-      tokens = lines[1];
-      expect(tokens.length).toBe(3);
-      expect(tokens[0]).toEqual({value: "}", scopes: ["source.lilypond", "meta.paper-block.lilypond", "meta.paper-expression.lilypond"]});
-      expect(tokens[1]).toEqual({value: "%{", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.begin.lilypond"]});
-      expect(tokens[2]).toEqual({value: "%}", scopes: ["source.lilypond", "comment.block.lilypond", "punctuation.definition.comment.end.lilypond"]});
-    });
-
     it("tokenizes keywords", () => {
       // To create the strings in the keywords array, run:
       /*
 git clone https://git.savannah.gnu.org/git/lilypond.git
 cd lilypond
-git checkout stable/2.22
+git checkout tags/v2.24.4
 python -c '
 import re
 keywords = {"maininput", "include", "version"}
@@ -824,46 +707,16 @@ rm -fR lilypond
         const keyword = `\\${suffix}`;
         const {tokens} = grammar.tokenizeLine(keyword);
         expect(tokens.length).toBe(1);
-        const scopes = ["source.lilypond", "keyword.other.lilypond"];
-        switch (keyword) {
-          case "\\notemode":
-            scopes.splice(1, 0, "meta.note-mode.lilypond");
-            break;
-          case "\\markup":
-          case "\\markuplist":
-            scopes.splice(1, 0, "meta.markup-block.lilypond");
-            break;
-          case "\\addlyrics":
-          case "\\lyricmode":
-          case "\\lyrics":
-          case "\\lyricsto":
-            scopes.splice(1, 0, "meta.lyric-mode.lilypond");
-            break;
-          case "\\drummode":
-          case "\\drums":
-            scopes.splice(1, 0, "meta.drum-mode.lilypond");
-            break;
-          case "\\chordmode":
-            scopes.splice(1, 0, "meta.chord-mode.lilypond");
-            break;
-          case "\\figuremode":
-          case "\\figures":
-            scopes.splice(1, 0, "meta.figure-mode.lilypond");
-            break;
-          case "\\paper":
-            scopes.splice(1, 0, "meta.paper-block.lilypond");
-            break;
-        }
-        expect(tokens[0]).toEqual({value: keyword, scopes: scopes});
+        expect(tokens[0]).toEqual({value: keyword, scopes: ["source.lilypond", "keyword.other.lilypond"]});
       }
     });
 
     it("tokenizes built-in commands", () => {
-      // To create the strings in the commands array, run:
+      // To create the strings in the commands array, paste the result of:
       /*
 git clone https://git.savannah.gnu.org/git/lilypond.git
 cd lilypond
-git checkout stable/2.22
+git checkout tags/v2.24.4
 python -c '
 import re
 commands = set()
@@ -895,11 +748,12 @@ commands = list(commands)
 commands.sort()
 for command in commands:
     print("        \"\\\\" + command + "\",")
-'
+' | pbcopy
 cd ..
 rm -fR lilypond
       */
       const commands = [
+        "\\EnableGregorianDivisiones",
         "\\RemoveAllEmptyStaves",
         "\\RemoveEmptyStaves",
         "\\absolute",
@@ -910,12 +764,14 @@ rm -fR lilypond
         "\\addInstrumentDefinition",
         "\\addQuote",
         "\\aeolian",
+        "\\after",
         "\\afterGrace",
         "\\afterGraceFraction",
         "\\aikenHeads",
         "\\aikenHeadsMinor",
         "\\aikenThinHeads",
         "\\aikenThinHeadsMinor",
+        "\\allowBreak",
         "\\allowPageTurn",
         "\\allowVoltaHook",
         "\\alterBroken",
@@ -957,6 +813,8 @@ rm -fR lilypond
         "\\bassFigureStaffAlignmentUp",
         "\\beamExceptions",
         "\\bendAfter",
+        "\\bendHold",
+        "\\bendStartLevel",
         "\\bigger",
         "\\blackTriangleMarkup",
         "\\bookOutputName",
@@ -967,11 +825,13 @@ rm -fR lilypond
         "\\breve",
         "\\cadenzaOff",
         "\\cadenzaOn",
+        "\\caesura",
         "\\center",
         "\\chordRepeats",
         "\\chordmodifiers",
         "\\clef",
         "\\coda",
+        "\\codaMark",
         "\\compoundMeter",
         "\\compressEmptyMeasures",
         "\\compressMMRests",
@@ -1027,6 +887,8 @@ rm -fR lilypond
         "\\dynamicUp",
         "\\easyHeadsOff",
         "\\easyHeadsOn",
+        "\\enablePolymeter",
+        "\\endSkipNCs",
         "\\endSpanners",
         "\\endcr",
         "\\endcresc",
@@ -1045,6 +907,7 @@ rm -fR lilypond
         "\\fff",
         "\\ffff",
         "\\fffff",
+        "\\fine",
         "\\finger",
         "\\fixed",
         "\\flageolet",
@@ -1055,6 +918,7 @@ rm -fR lilypond
         "\\funkHeadsMinor",
         "\\fz",
         "\\germanChords",
+        "\\glide",
         "\\glissando",
         "\\grace",
         "\\grobdescriptions",
@@ -1084,6 +948,7 @@ rm -fR lilypond
         "\\invertChords",
         "\\ionian",
         "\\italianChords",
+        "\\jump",
         "\\keepWithTag",
         "\\key",
         "\\kievanOff",
@@ -1114,6 +979,7 @@ rm -fR lilypond
         "\\markLengthOn",
         "\\markupMap",
         "\\maxima",
+        "\\medianChordGridStyle",
         "\\melisma",
         "\\melismaEnd",
         "\\mergeDifferentlyDottedOff",
@@ -1190,6 +1056,8 @@ rm -fR lilypond
         "\\prallmordent",
         "\\prallprall",
         "\\prallup",
+        "\\preBend",
+        "\\preBendHold",
         "\\predefinedFretboardsOff",
         "\\predefinedFretboardsOn",
         "\\propertyOverride",
@@ -1217,7 +1085,10 @@ rm -fR lilypond
         "\\sacredHarpHeads",
         "\\sacredHarpHeadsMinor",
         "\\scaleDurations",
+        "\\section",
+        "\\sectionLabel",
         "\\segno",
+        "\\segnoMark",
         "\\semiGermanChords",
         "\\setDefaultDurationToQuarter",
         "\\settingsFrom",
@@ -1237,6 +1108,8 @@ rm -fR lilypond
         "\\signumcongruentiae",
         "\\single",
         "\\skip",
+        "\\skipNC",
+        "\\skipNCs",
         "\\slashedGrace",
         "\\slashturn",
         "\\slurDashPattern",
@@ -1256,10 +1129,10 @@ rm -fR lilypond
         "\\southernHarmonyHeads",
         "\\southernHarmonyHeadsMinor",
         "\\sp",
-        "\\spacingTweaks",
         "\\spp",
         "\\staccatissimo",
         "\\staccato",
+        "\\staffHighlight",
         "\\start",
         "\\startAcciaccaturaMusic",
         "\\startAppoggiaturaMusic",
@@ -1285,6 +1158,7 @@ rm -fR lilypond
         "\\stopMeasureSpanner",
         "\\stopSlashedGraceMusic",
         "\\stopStaff",
+        "\\stopStaffHighlight",
         "\\stopTextSpan",
         "\\stopTrillSpan",
         "\\stopped",
@@ -1301,8 +1175,10 @@ rm -fR lilypond
         "\\teeny",
         "\\temporary",
         "\\tenuto",
+        "\\textEndMark",
         "\\textLengthOff",
         "\\textLengthOn",
+        "\\textMark",
         "\\textSpannerDown",
         "\\textSpannerNeutral",
         "\\textSpannerUp",
@@ -1337,6 +1213,7 @@ rm -fR lilypond
         "\\unaCorda",
         "\\undo",
         "\\unfoldRepeats",
+        "\\unfolded",
         "\\up",
         "\\upbow",
         "\\upmordent",
@@ -1355,7 +1232,9 @@ rm -fR lilypond
         "\\voiceTwoStyle",
         "\\voices",
         "\\void",
+        "\\volta",
         "\\vowelTransition",
+        "\\vshape",
         "\\walkerHeads",
         "\\walkerHeadsMinor",
         "\\whiteCircleMarkup",
@@ -1368,22 +1247,16 @@ rm -fR lilypond
       for (const command of commands) {
         const {tokens} = grammar.tokenizeLine(command);
         expect(tokens.length).toBe(1);
-        const scopes = ["source.lilypond", "support.function.lilypond"];
-        switch (command) {
-          case "\\fixed":
-          case "\\relative":
-            scopes.splice(1, 0, `meta.${command.substring(1)}.lilypond`);
-        }
-        expect(tokens[0]).toEqual({value: command, scopes: scopes});
+        expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "support.function.lilypond"]});
       }
     });
 
     it("tokenizes built-in markup commands", () => {
-      // To create the strings in the commands array, run:
+      // To create the strings in the commands array, paste the result of:
       /*
 git clone https://git.savannah.gnu.org/git/lilypond.git
 cd lilypond
-git checkout stable/2.22
+git checkout tags/v2.24.4
 python -c '
 import re
 commands = set()
@@ -1394,11 +1267,12 @@ for path in ["ly/toc-init.ly",
     with open(path) as file:
         for match in re.finditer(r"\(define-markup(?:-list)?-command\s*\(([-A-Za-z]+)", file.read(), re.MULTILINE):
             commands.add(match.group(1))
+commands.remove("command-name")
 commands = list(commands)
 commands.sort()
 for command in commands:
     print("        \"\\\\" + command + "\",")
-'
+' | pbcopy
 cd ..
 rm -fR lilypond
       */
@@ -1419,7 +1293,6 @@ rm -fR lilypond
         "\\column",
         "\\column-lines",
         "\\combine",
-        "\\command-name",
         "\\concat",
         "\\dir-column",
         "\\doubleflat",
@@ -1566,9 +1439,32 @@ rm -fR lilypond
       for (const command of commands) {
         const {tokens} = grammar.tokenizeLine(`\\markup ${command}`);
         expect(tokens.length).toBe(3);
-        expect(tokens[0]).toEqual({value: "\\markup", scopes: ["source.lilypond", "meta.markup-block.lilypond", "keyword.other.lilypond"]});
-        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.markup-block.lilypond"]});
-        expect(tokens[2]).toEqual({value: command, scopes: ["source.lilypond", "meta.markup-block.lilypond", "support.function.lilypond"]});
+        expect(tokens[0]).toEqual({value: "\\markup", scopes: ["source.lilypond", "keyword.other.lilypond"]});
+        expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+        const scopes = ["source.lilypond"];
+        switch (command) {
+          case "\\fermata":
+          case "\\finger":
+          case "\\footnote":
+          case "\\huge":
+          case "\\large":
+          case "\\normalsize":
+          case "\\parenthesize":
+          case "\\small":
+          case "\\smaller":
+          case "\\teeny":
+          case "\\tiny":
+            scopes.push("support.function.lilypond");
+            break;
+          case "\\override":
+          case "\\rest":
+          case "\\score":
+            scopes.push("keyword.other.lilypond");
+            break;
+          default:
+            scopes.push("support.function.markup.lilypond");
+        }
+        expect(tokens[2]).toEqual({value: command, scopes: scopes});
       }
     });
 
@@ -1578,12 +1474,8 @@ rm -fR lilypond
 lilypond --loglevel=ERROR - <<EOS
 #(begin
   (for-each
-    (lambda (drumPitchName)
-      (display "        \"")(display (car drumPitchName))(display "\",")(newline)
-    )
-    drumPitchNames
-  )
-)
+    (lambda (drumPitchName) (display "        \"")(display (car drumPitchName))(display "\",")(newline))
+    drumPitchNames))
 EOS
       */
       const percussionNoteNames = [
@@ -1650,16 +1542,6 @@ EOS
         "mutetriangle",
         "triangle",
         "opentriangle",
-        "oneup",
-        "twoup",
-        "threeup",
-        "fourup",
-        "fiveup",
-        "onedown",
-        "twodown",
-        "threedown",
-        "fourdown",
-        "fivedown",
         "bda",
         "bd",
         "ssh",
@@ -1724,29 +1606,19 @@ EOS
         "tri",
         "trio",
         "tt",
-        "ua",
-        "ub",
-        "uc",
-        "ud",
-        "ue",
-        "da",
-        "db",
-        "dc",
-        "dd",
-        "de",
       ];
 
       for (const command of ["\\drummode", "\\drums"]) {
         for (const percussionNoteName of percussionNoteNames) {
           const {tokens} = grammar.tokenizeLine(`${command} { ${percussionNoteName} }`);
           expect(tokens.length).toBe(7);
-          expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "meta.drum-mode.lilypond", "keyword.other.lilypond"]});
-          expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond"]});
-          expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-          expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-          expect(tokens[4]).toEqual({value: percussionNoteName, scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond", "support.variable.percussion-note.lilypond"]});
-          expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
-          expect(tokens[6]).toEqual({value: "}", scopes: ["source.lilypond", "meta.drum-mode.lilypond", "meta.drum-expression.lilypond"]});
+          expect(tokens[0]).toEqual({value: command, scopes: ["source.lilypond", "keyword.other.lilypond"]});
+          expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond"]});
+          expect(tokens[2]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+          expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+          expect(tokens[4]).toEqual({value: percussionNoteName, scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.percussion-note.lilypond"]});
+          expect(tokens[5]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+          expect(tokens[6]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
         }
       }
     });
@@ -1761,15 +1633,10 @@ lilypond --loglevel=ERROR - <<EOS
     (lambda (language)
       (display "        ")(display language)(display ": [")(newline)
       (for-each
-        (lambda (pitchName)
-          (display "          \"")(display (car pitchName))(display "\",")(newline)
-        )
-        (ly:assoc-get language language-pitch-names)
-      )
-      (display "        ],")(newline)
-    )
-    '(nederlands catalan deutsch english español français italiano norsk portugues suomi svenska vlaams)
-  )
+        (lambda (pitchName) (display "          \"")(display (car pitchName))(display "\",")(newline))
+        (ly:assoc-get language language-pitch-names))
+      (display "        ],")(newline))
+    '(nederlands catalan deutsch english español français italiano norsk portugues suomi svenska vlaams))
   (display "      };")(newline)
 )
 EOS
@@ -2715,11 +2582,11 @@ EOS
         for (const noteName of noteNamesByLanguage[language]) {
           const {tokens} = grammar.tokenizeLine(`{ ${noteName} }`);
           expect(tokens.length).toBe(5);
-          expect(tokens[0]).toEqual({value: "{", scopes: ["source.lilypond", "meta.music-expression.lilypond"]});
-          expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.music-expression.lilypond"]});
-          expect(tokens[2]).toEqual({value: noteName, scopes: ["source.lilypond", "meta.music-expression.lilypond", "support.variable.note-name.lilypond"]});
-          expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.music-expression.lilypond"]});
-          expect(tokens[4]).toEqual({value: "}", scopes: ["source.lilypond", "meta.music-expression.lilypond"]});
+          expect(tokens[0]).toEqual({value: "{", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+          expect(tokens[1]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+          expect(tokens[2]).toEqual({value: noteName, scopes: ["source.lilypond", "meta.expression-block.lilypond", "text.note-name.lilypond"]});
+          expect(tokens[3]).toEqual({value: " ", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
+          expect(tokens[4]).toEqual({value: "}", scopes: ["source.lilypond", "meta.expression-block.lilypond"]});
         }
       }
     });
