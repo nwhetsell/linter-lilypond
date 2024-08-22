@@ -411,7 +411,7 @@ print(regex_opt(markup_commands, r"\\\\", r"(?!-?[[:alpha:]])"))
         name:  "punctuation.plus-sign.lilypond"
         match: "\\+"
       },{
-        # fraction delimiter, tuplet division, chord inversion chord
+        # fraction delimiter, tuplet division, chord inversion
         name:  "keyword.operator.forward-slash.lilypond"
         match: "/(?!\\+)"
       }
