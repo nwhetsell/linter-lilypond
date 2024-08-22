@@ -663,7 +663,7 @@ describe("linter-lilypond", () => {
     it("tokenizes keywords", () => {
       // To create the strings in the keywords array, run:
       /*
-git clone https://git.savannah.gnu.org/git/lilypond.git
+git clone https://gitlab.com/lilypond/lilypond.git
 cd lilypond
 git checkout tags/v2.24.4
 python -c '
@@ -754,7 +754,7 @@ rm -fR lilypond
     it("tokenizes built-in commands", () => {
       // To create the strings in the commands array, paste the result of:
       /*
-git clone https://git.savannah.gnu.org/git/lilypond.git
+git clone https://gitlab.com/lilypond/lilypond.git
 cd lilypond
 git checkout tags/v2.24.4
 python -c '
@@ -1294,7 +1294,7 @@ rm -fR lilypond
     it("tokenizes built-in markup commands", () => {
       // To create the strings in the commands array, paste the result of:
       /*
-git clone https://git.savannah.gnu.org/git/lilypond.git
+git clone https://gitlab.com/lilypond/lilypond.git
 cd lilypond
 git checkout tags/v2.24.4
 python -c '
